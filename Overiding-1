@@ -1,0 +1,79 @@
+Overriding:
+---------
+
+Method Overriding:-
+------------------
+If two classes have same method name , same return type , same number of parameters , same type of parameters and same order   and If they have IS-A relation ship between we call as Method Overriding.
+
+Example:
+--------
+          A 
+          m1()
+          B   extends A
+          m1()
+
+
+If we are not satisfied with parent class implementation and we we want to redefine the body  we have redefine in the child class
+
+Rule:
+ By following same method name, same return type and same no of parameters. same type and order of parametrs and they should have IS -A Relation ship.
+
+ public class A {
+	 public int speed(String bike) {
+		 return 50;
+	 }
+}
+
+public class B extends A {
+     
+	@Override
+	public int speed(String bike) {
+     return 100;
+	}
+
+}
+
+public class App {
+	public static void main(String[] args) {
+		A a = new B();
+		int speed = a.speed("Pulsar");
+		System.out.println("Speed is :"+speed);
+	}
+}
+
+public class A {
+
+
+	 public int minSpeed() {
+		 return 50;
+	 }
+	 
+	 public int maxSpeed() {
+		 return 100;
+	 }
+}
+
+
+
+public class B extends A {
+
+
+
+	@Override
+	public int maxSpeed() {
+		return 150;
+	}
+
+}
+public class App {
+
+
+	public static void main(String[] args) {
+
+		A a = new B();
+		int mimspeed = a.minSpeed();
+		int maxspeed = a.maxSpeed();
+		System.out.println(mimspeed);
+		System.out.println(maxspeed);
+	}
+}
