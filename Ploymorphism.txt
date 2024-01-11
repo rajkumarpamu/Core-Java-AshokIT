@@ -1,0 +1,456 @@
+Inheritance:
+-----------
+Acquiring poperties (fields and methods) from parent class to child class .
+
+Why Inheriatnce?
+
+1) Re usablity
+2) Overriding
+3) Abstraction
+
+IS-A Relation
+-------------
+
+Syntax:
+-------
+class ChildClass <extends> ParentClass{
+	
+
+}
+
+Employee   ->   Developer
+Bike       ->   Pulser
+Animal     ->   Dog
+Bank       ->   SBI
+
+
+public class Bonus {
+	 int bonus=10000;
+
+}
+
+public class TechincalBonus extends Bonus{
+	
+	int additionalBonus = 5000;
+
+}
+
+
+public class App {
+
+	public static void main(String[] args) {
+		// Non Techincal
+		Bonus bonus = new Bonus();
+		System.out.println("Non Techincal :" + bonus.bonus);
+
+		// Techincal Employees
+		TechincalBonus t = new TechincalBonus();
+		int bonus2 = t.bonus;
+		System.out.println("Techincal :" + (bonus2 + t.additionalBonus));
+
+	}
+}
+
+
+public class Bonus {
+
+	int bonus = 10000;
+
+	public void print() {
+		System.out.println("Non technical Bonus :" + bonus);
+	}
+}
+
+
+
+public class TechincalBonus extends Bonus{
+	
+	int additionalBonus = 5000;
+	
+	public void print() {
+		System.out.println("Technical Bonus :" + (bonus + additionalBonus));
+	}
+
+}
+
+
+public class App {
+
+	public static void main(String[] args) {
+		// Non Techincal
+		Bonus bonus = new Bonus();
+		bonus.print();
+
+		// Techincal Employees
+		TechincalBonus tBonus = new TechincalBonus();
+		tBonus.print();
+
+	}
+}
+
+
+
+public class Bonus {
+
+	int bonus = 10000;
+
+	public void print() {
+		System.out.println("Non technical Bonus :" + bonus);
+	}
+}
+
+
+public class TechincalBonus extends Bonus{
+	
+	int bonus=5000;
+	
+	public void print() {
+		System.out.println("Technical Bonus :" + (bonus + bonus));
+	}
+
+}
+
+
+
+public class App {
+
+	public static void main(String[] args) {
+		// Non Techincal
+		Bonus bonus = new Bonus();
+		bonus.print();
+
+		// Techincal Employees
+		TechincalBonus tBonus = new TechincalBonus();
+		tBonus.print();
+
+	}
+}
+
+
+
+
+
+public class Bonus {
+	
+	public Bonus() {
+		System.out.println("Bonus Obj is created");
+	}
+
+	int bonus = 10000;
+
+	public void print() {
+		System.out.println("Non technical Bonus :" + bonus);
+	}
+}
+
+
+public class TechincalBonus extends Bonus{
+	
+	public TechincalBonus() {
+		System.out.println("Hence Proved");
+	}
+	
+	int bonus=5000;
+	
+	public void print() {
+		System.out.println("Technical Bonus :" + (bonus + bonus));
+	}
+
+}
+
+
+
+public class App {
+
+	public static void main(String[] args) {
+
+		// Techincal Employees
+		TechincalBonus tBonus = new TechincalBonus();
+
+
+	}
+}
+
+1)Single level
+2)Mullti level
+3)Hierarchial
+4)Multiple
+5)Hybrid
+
+
+
+
+public class Bonus {
+
+	public void print() {
+		System.out.println("Non technical Bonus :");
+	}
+}
+
+
+public class TechincalBonus extends Bonus{
+	
+
+	public void print() {
+		System.out.println("Technical Bonus :");
+	}
+
+}
+
+
+public class TechincalBonus extends Bonus{
+	
+
+	public void print() {
+		System.out.println("Technical Bonus :");
+	}
+
+}
+
+
+public class Bonus extends Bonus{
+	
+	public Bonus() {
+		System.out.println("Bonus Obj is created");
+	}
+
+	public void print() {
+		System.out.println("Non technical Bonus :");
+	}
+}
+
+CE:
+Cycle detected: the type Bonus cannot extend/implement itself or one o
+
+B   extends   A  - Parent to child is allowed
+A   extends   B  - Child to parent inheritance is not    allowed
+
+
+
+public class Bonus extends Object{
+	
+	public Bonus() {
+		System.out.println("Bonus Obj is created");
+	}
+
+	public void print() {
+		System.out.println("Non technical Bonus :");
+	}
+}
+
+Class Object
+java.lang.Object
+
+public class Object
+Class Object is the root of the class hierarchy. 
+Every class has Object as a superclass. All objects, including arrays, implement the methods of this class.
+
+Class<?>	getClass()
+Returns the runtime class of this Object.
+
+public class TechincalBonus extends Bonus  {}
+
+public class Bonus {}
+
+Note: By default Bonus will extends Object class
+
+Rule:
+If a class do not extend any class by default that class will extend Object class.
+
+For evry class directly or indeorectly Object is the super
+class
+
+Example:
+public class Bonus {
+	
+}
+
+public class App {
+
+	public static void main(String[] args) {
+
+		Bonus bonus = new Bonus();
+		System.out.println("Super class :" + bonus.getClass().getSuperclass());
+
+	}
+}
+
+Result:
+Super class :class java.lang.Object
+
+public class Bonus {
+
+}
+
+public class TechincalBonus extends Bonus  {
+
+}
+
+public class App {
+
+	public static void main(String[] args) {
+
+		TechincalBonus bonus = new TechincalBonus();
+		System.out.println("Super class :" + bonus.getClass().getSuperclass());
+
+	}
+}
+
+
+Single level Inheritance:
+------------------------
+
+Child extends Parent
+
+Multi level Inheritance:
+------------------------
+
+If a class extend more than 1 class in the form of chain format we call it as multi level inheritance
+
+public class A {
+	public A() {
+		System.out.println("A obj is created");
+	}
+}
+
+public class B extends A {
+	public B() {
+		System.out.println("B obj is created");
+	}
+
+}
+
+public class C extends B {
+	public C() {
+		System.out.println("C obj is craeted");
+	}
+}
+
+public class App {
+	public static void main(String[] args) {
+		C  c  = new C();	
+	}
+}
+
+Result:
+A obj is created
+B obj is created
+C obj is craeted
+
+
+
+public class A {
+
+	public A() {
+		System.out.println("A obj is created");
+	}
+
+	public void m1() {
+		System.out.println("we are in m1 A class");
+	}
+
+}
+
+
+
+public class B extends A {
+	
+	public B() {
+		System.out.println("B obj is created");
+	}
+	public void m1() {
+		System.out.println("we are in m1 B class");
+	}
+
+}
+
+public class C extends B {
+	
+	public C() {
+		System.out.println("C obj is craeted");
+	}
+	
+	public void m1() {
+		System.out.println("we are in m1 C class");
+	}
+
+}
+
+public class App {
+	public static void main(String[] args) {
+		C  c  = new C();
+		c.m1();	
+	}
+}
+
+Result:
+A obj is created
+B obj is created
+C obj is craeted
+we are in m1 C class
+
+Note:
+public class Bonus {
+	static int a=10;
+}
+
+
+public class TechincalBonus extends Bonus  {	
+	public static void main(String[] args) {
+       System.out.println(TechincalBonus.a);
+	}
+}
+
+Result:
+10
+
+
+Multiple Inheritance:
+---------------------
+
+If a class extends more that one class we call it as multiple inheritance.
+
+
+
+public class C extends A extends B {
+	
+}
+Note:
+Syntax error on token "extends", permits expected
+
+public class C extends A , B {
+	
+
+
+}
+
+Note:
+Because of ambiguity problem multiple inheritance is not allowed  in java
+
+Hierachial
+----------
+
+public class A {
+	public void m1() {
+		System.out.println("we are in m1 A class");
+	}
+}
+
+
+public class B extends A {
+
+}
+
+
+public class C extends A {
+	
+}
+
+public class App {
+	public static void main(String[] args) {
+		C c = new C();
+		c.m1();
+		B b = new B();
+		b.m1();
+	}
+}
