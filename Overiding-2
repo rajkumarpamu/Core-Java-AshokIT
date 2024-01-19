@@ -1,0 +1,195 @@
+Overriding:
+---------
+
+Method Overriding:-
+------------------
+If two classes have same method name , same return type , same number of parameters , same type of parameters and same order   and If they have IS-A relation ship between we call as Method Overriding.
+
+Example:
+--------
+          A 
+          m1()
+          B   extends A
+          m1()
+
+
+If we are not satisfied with parent class implementation and we we want to redefine the body  we have redefine in the child class
+
+Rule:
+ By following same method name, same return type and same no of parameters. same type and order of parametrs and they should have IS -A Relation ship.
+
+ public class A {
+	 public int speed(String bike) {
+		 return 50;
+	 }
+}
+
+public class B extends A {
+     
+	@Override
+	public int speed(String bike) {
+     return 100;
+	}
+
+}
+
+public class App {
+	public static void main(String[] args) {
+		A a = new B();
+		int speed = a.speed("Pulsar");
+		System.out.println("Speed is :"+speed);
+	}
+}
+
+public class A {
+
+
+	 public int minSpeed() {
+		 return 50;
+	 }
+	 
+	 public int maxSpeed() {
+		 return 100;
+	 }
+}
+
+
+
+public class B extends A {
+
+
+
+	@Override
+	public int maxSpeed() {
+		return 150;
+	}
+
+}
+public class App {
+
+
+	public static void main(String[] args) {
+
+		A a = new B();
+		int mimspeed = a.minSpeed();
+		int maxspeed = a.maxSpeed();
+		System.out.println(mimspeed);
+		System.out.println(maxspeed);
+	}
+}
+
+Note:
+
+Multiple markers at this line
+	- This static method cannot hide the instance method from A
+	- The method maxSpeed() of type B must override or imple
+
+
+
+	The method maxSpeed() of type B must override or implement a supertype method
+
+
+
+
+
+public class A {
+	 public static int minSpeed() {
+		 return 50;
+	 }
+}
+public class B extends A {
+	 public static  int minSpeed() {
+		 return 100;
+	 }
+}
+
+public class App {
+
+
+	public static void main(String[] args) {
+
+		A a = new B();
+		int mimspeed = a.minSpeed();
+
+	}
+}
+
+Note:
+Static Method is overriding is not allowed instead we call as Method Hiding
+
+Result:
+50
+
+
+public class A {
+	 public  int minSpeed() {
+		 return 50;
+	 }
+	 
+}
+
+public class B extends A {
+
+	@Override
+	public double minSpeed() {
+		return 100;
+	}
+
+}
+
+CE:
+Multiple markers at this line
+	- The return type is incompatible with A.
+	 minSpeed()
+
+
+public class A {
+	 public  Object minSpeed() {
+		 return 50;
+	 }
+}
+
+
+public class B extends A {
+	@Override
+	public String minSpeed() {
+		return "Test";
+	}
+}
+
+public class App {
+
+
+	public static void main(String[] args) {
+
+		A a = new B();
+		 Object s= a.minSpeed();
+		 System.out.println(s);
+		 
+		 String s1= (String)a.minSpeed();
+		 System.out.println(s1);
+
+	}
+}
+
+Result:
+Test
+Test
+
+
+
+public class A {
+	 public final A minSpeed() {
+		 return new A();
+	 }
+}
+
+public class B extends A {
+	@Override
+	public B minSpeed() {
+		return new B();
+	}
+}
+
+CE:
+Cannot override the final method from A
