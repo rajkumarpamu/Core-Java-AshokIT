@@ -1,0 +1,220 @@
+Rules:
+
+instance -> static  -> Not allowed
+static -> instance  -> Not allowed
+static -> static   -> Not allowed (This process we cal as method hiding)
+
+A a = new B();
+
+(IS-A Relation)
+
+final -> Not allowed
+
+Constructor Overriding is not allowed
+Parent class name and child class name are different.
+
+return type:
+------------
+
+int  -> double  -> Not Allowed
+Object  -> String  (Object o = new String) (Upcasting)
+String  -> Object -> Not Allowed (String s = new Object())
+
+
+a b = (c)d;
+String s = (String)d;
+
+
+final keyword in java:
+---------------------
+It is used to create constants in java.
+
+Final variables also called as Blank variables or Unintialized variables
+
+
+public class A {
+
+	public static final String INSTITUTE_NAME = "ASHOKIT";
+	public static void main(String[] args) {
+		System.out.println(A.INSTITUTE_NAME);
+	}
+
+}
+
+
+
+
+public class A {
+	public static final String INSTITUTE_NAME = "ASHOKIT";
+	public static void main(String[] args) {
+		System.out.println(A.INSTITUTE_NAME);
+		System.out.println(Integer.MAX_VALUE);
+	}
+
+}
+
+class  -> Inheritance is not allowed
+variable -> Assigment is not allowed
+method  -> Overriding is not allowed
+constructor -> Illegal as constrcutor overidng is not possible
+
+
+public class A {
+
+	final int x = 10;
+
+	public static void main(String[] args) {
+
+		A a = new A();
+        //Assignment
+		a.x = 20;
+		System.out.println(a.x);
+
+	}
+
+}
+
+CE:Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+	The final field A.x cannot be assigned
+	at A.main(A.java:11)
+
+
+
+public class A {
+
+	final int x;
+
+	public static void main(String[] args) {
+
+		A a = new A();
+		System.out.println(a.x);
+
+	}
+
+}
+
+CE:
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+	The blank final field x may not have been initialized
+
+	at A.<init>(A.java:4)
+	at A.main(A.java:8)
+
+
+
+int a=10;
+int b=++a;
+
+public class A {
+
+		//Intializing final variable during deceleration
+		final int x=10;
+		public static void main(String[] args) {
+			A a = new A();
+			System.out.println(a.x);	
+		}
+	
+}
+
+
+public class A {
+	final int x;
+	// By using constrcutor
+	public A() {
+		x = 10;
+	}
+	public static void main(String[] args) {
+		A a = new A();
+		System.out.println(a.x);
+	}
+
+}
+
+
+
+public class A {
+
+	final int x;
+    //Instance Block
+	public A() {
+		System.out.println("Hi");
+	}
+	{
+		System.out.println("Instance Block");
+		x=10;
+	}
+
+	public static void main(String[] args) {
+
+		A a = new A();
+		System.out.println(a.x);
+
+	}
+
+}
+
+Result:
+------
+Instance Block
+Hi
+10
+
+
+method:
+-------
+
+
+
+public class A {
+
+	public final void m1() {
+		System.out.println("we are in m1");
+
+	}
+}
+
+
+public class B extends A {
+
+	@Override
+	public void m1() {
+		System.out.println("we are in m1 B class");
+	}
+}
+
+CE:
+- overrides A.m1
+	- Cannot override the final method 
+
+
+Constrcutor:
+---------
+
+
+public class A {
+	public final A() {
+	}
+}
+
+Illegal modifier for the constructor in type A; only public, protected & private are permitted
+
+
+class:
+------
+
+public final class A {
+
+}
+
+public class B extends A {
+
+
+}
+
+public class B extends A {
+
+
+}
+CE:
+The type B cannot subclass the final class A
