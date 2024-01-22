@@ -1,0 +1,184 @@
+
+public  class A {
+	int a;
+	public A(int a) {
+		this.a=a;
+	}	
+	public static void main(String[] args) {
+			
+		final A x = new A(10);
+		System.out.println(x.a);
+
+		x.a=20;
+		System.out.println(x.a);
+		//Not possible
+		x=new A();
+	}
+
+}
+
+ce:
+The final local variable x cannot be assigned. It must be blank and not using a compound assignment
+
+
+
+public  class A {
+
+	int a;
+	public A(int a) {
+		this.a=a;
+	}
+
+	public static void main(String[] args) {
+		
+		 A x = new A(10);
+		 System.out.println(x.hashCode());
+		 System.out.println(x.a);
+		
+		x.a=20;
+		System.out.println(x.a);
+		//Assigment
+		x=new A(30);
+		System.out.println(x.hashCode());
+		System.out.println(x.a);
+	}
+
+}
+
+Result:
+515132998
+10
+20
+474675244
+30
+
+ExceptionHandling:
+------------------
+
+Its is mechanism in java to handle exception.
+
+Exception:
+--------
+An unxpecetd event which will cause abnormal termination.
+
+Thrown when an exceptional arithmetic condition has occurred. For example, an integer "divide by zero" throws an instance of this class. ArithmeticException objects may be constructed by the virtual machine
+
+Example-1:
+public class A {
+
+	public static void main(String[] args) {
+
+		System.out.println(10 / 2);// 5
+		System.out.println(10 / 3);// 3
+		System.out.println(10 / 0);//
+
+	}
+
+}
+
+
+5
+3
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at A.main(A.java:10)
+
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10 / 2);// 5
+		System.out.println(10 / 0);//
+		System.out.println(10 / 3);// 3
+	}
+
+}
+
+public class A {
+
+	public static void main(String[] args) {
+
+		System.out.println(10 / 2);// 5
+		System.out.println(10 / 0);//
+		System.out.println(10 / 3);// 3
+
+	}
+
+}
+
+5
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at A.main(A.java:8)
+
+
+
+public class A {
+
+	public static void main(String[] args) {
+		String s = null;
+		System.out.println(s.charAt(1));
+	}
+
+}
+
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "String.charAt(int)" because "s" is null
+	at A.main(A.java:8)
+
+
+Exceptions:
+-----------
+
+Checked Exception
+-----------------
+Exceptions that occur at compile time we call as Checked exception
+
+Unchecked Exception
+---------------------
+
+Exceptions that occur at run time we call as Un-Checked exception
+
+
+User Defined Exception
+--------------------
+AgeNotValidException
+UserNotValidException
+
+Built in Exception:
+--------------------
+ArithmeticException
+NullPointerException
+
+
+Exception Hierarchy:
+-------------------]
+
+Throwable:
+----------
+
+The Throwable class is the superclass of all errors and exceptions in the Java language. 
+
+Only objects that are instances of this class (or one of its subclasses) are thrown by the Java Virtual Machine.
+
+
+class Error
+-----------
+
+An Error is a subclass of Throwable that indicates serious problems that a reasonable application should not try to catch. Most such errors are abnormal conditions
+
+
+public class A {
+	public static void main(String[] args) {
+		int ar[]= new int[2147483647];
+	}
+
+}
+
+
+Exception in thread "main" java.lang.OutOfMemoryError: Requested array size exceeds VM limit
+	at A.main(A.java:7)
+
+
+Exception:
+--------
+
+The class Exception and its subclasses are a form of Throwable that indicates conditions that a reasonable application might want to catch.
+
+The class Exception and any subclasses that are not also subclasses of RuntimeException are checked exceptions.
