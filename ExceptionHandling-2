@@ -1,0 +1,458 @@
+Excption Handling:
+-----------------
+
+try
+catch
+throw
+throws
+finally
+
+try..catch block:
+----------------
+
+Synatx:
+------
+
+try{
+//statements	
+}
+catch(Exception e){
+ //statements	
+}
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		System.out.println(10/3);
+	
+	}
+
+}
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/1);
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		System.out.println(10/3);
+	
+	}
+
+}.
+
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		System.out.println(10/3);
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+Result:
+
+5
+ArithmeticException has occured
+2
+
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		System.out.println(10/3);
+		}
+		catch(Exception ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		System.out.println(10/3);
+		}
+		catch(RuntimeException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		System.out.println(10/3);
+		}
+		catch(Throwable ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		System.out.println(10/3);
+		}
+		catch(Object ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+
+Only objects that are instances of this class (or one of its subclasses) are thrown by the Java Virtual Machine.
+
+No exception of type Object can be thrown; an exception type must be a subclass of Throwable.
+
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		System.out.println(10/3);
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		catch(NullPointerException ex) {
+			System.out.println("NullPointerException has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		System.out.println(10/3);
+		}
+		catch(NullPointerException ex) {
+			System.out.println("NullPointerException has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+
+5
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at A.main(A.java:9)
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		System.out.println(10/3);
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		catch(Exception ex) {
+			System.out.println("Exception has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+Result:
+
+5
+ArithmeticException has occured
+2
+
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/0);
+		System.out.println(10/3);
+		}
+		catch(Exception ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+CE:
+
+Unreachable catch block for ArithmeticException. It is already handled by the catch block for Exception
+	
+	
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		String s= null;
+		System.out.println(s.length());
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		catch(Exception ex) {
+			System.out.println("Exception has occured");
+		}
+	
+		System.out.println(10/4);
+	}
+
+}
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+		System.out.println(10 / 2);
+		try {
+			System.out.println(10 / 0);
+		} catch (ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		try {
+			String s = null;
+			System.out.println(s.length());
+		} catch (Exception ex) {
+			System.out.println("Exception has occured");
+		}
+
+		System.out.println(10 / 4);
+	}
+
+}
+
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+			System.out.println(10/0);
+		String s= null;
+		System.out.println(s.length());
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		catch(NullPointerException ex) {
+			System.out.println("Exception has occured");
+		}
+		catch(Exception ex) {
+			System.out.println("Exception has occured");
+		}
+		System.out.println(10/4);
+	}
+
+}
+
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/1);
+		try {
+		String s= null;
+		System.out.println(s.length());
+		}
+		catch(NullPointerException ex) {
+			System.out.println("Exception has occured");
+		}
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		catch(Exception ex) {
+			System.out.println("Exception has occured");
+		}
+		System.out.println(10/4);
+		}
+
+
+}
+}
+
+
+
+public class A {
+
+	public static void main(String[] args) {
+
+	
+		System.out.println(10/2);
+		try {
+		System.out.println(10/1);
+		try {
+		String s= null;
+		System.out.println(s.length());
+		}
+		catch(NullPointerException ex) {
+			System.out.println("Exception has occured");
+		}
+		}
+		catch(ArithmeticException ex) {
+			System.out.println("ArithmeticException has occured");
+		}
+		catch(Exception ex) {
+			System.out.println("Exception has occured");
+		}
+		System.out.println(10/4);
+		}
+
+
+}
+
+
+
+calBill -> void  -<Bill amount>
+
+calBill -> int  -<Bill amount> int bill = result+50;
+
+
+
+public class A {
+	public int div(int a,int b) {
+		try {
+			return a/b;
+		}
+		catch (ArithmeticException e) {
+			return 0;
+		}
+	}
+	public static void main(String[] args) {
+		A a = new A();
+		int result = a.div(10, 0);
+		System.out.println(result);
+		
+	}
+}
+
+
+
+public class A {
+
+	public void div(int a, int b) {
+		try {
+
+			if (b == 0) {
+				return;
+			} else {
+				System.out.println(a / b);
+			}
+
+			System.out.println("test");
+
+		} catch (ArithmeticException e) {
+			return;
+		}
+	}
+
+	public static void main(String[] args) {
+
+		A a = new A();
+		a.div(10, 0);
+
+	}
+}
+
+
+
