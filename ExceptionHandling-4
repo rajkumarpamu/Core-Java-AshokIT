@@ -1,0 +1,478 @@
+
+Throwable	getCause()
+String	    getMessage()
+void	    printStackTrace()
+
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10/1);
+
+		try {
+			String s= null;
+        System.out.println(s.lastIndexOf(1));
+		}
+		catch (NullPointerException e) {
+			System.out.println("Cause:"+e.getCause());
+			System.out.println("Message:"+e.getMessage());
+			System.out.println("Print Stack Trace");
+			e.printStackTrace();
+		}
+        System.out.println(10/2);
+
+	}
+}
+
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10/1);
+
+		try {
+			System.out.println(10/0);
+		}
+		catch (Exception e) {
+			System.out.println("Cause:"+e.getCause());
+			System.out.println("Message:"+e.getMessage());
+			System.out.println("Print Stack Trace");
+			e.printStackTrace();
+		}
+        
+        System.out.println(10/2);
+
+	}
+}
+
+
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10/1);
+
+		try {
+			System.out.println(10/0);
+		}
+		catch (ArithmeticException e) {
+			
+			throw new RuntimeException("Run time exception",e);
+		}
+        
+        System.out.println(10/2);
+
+	}
+}
+
+10
+Exception in thread "main" java.lang.RuntimeException: Run time exception
+	at A.main(A.java:11)
+Caused by: java.lang.ArithmeticException: / by zero
+	at A.main(A.java:7)
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10/1);
+
+		try {
+			System.out.println(10/0);
+		}
+		catch (ArithmeticException e) {
+			
+			try {
+			throw new RuntimeException("Run time exception",e);
+			}
+			catch(Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+        
+        System.out.println(10/2);
+
+	}
+}
+
+
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10 / 1);
+
+		try {
+			System.out.println(10 / 0);
+		} catch (ArithmeticException e) {
+
+			try {
+				String s=null;
+				if(s!= null) {
+					System.out.println(s.length());
+				}
+				else {
+				throw new RuntimeException("Value is nul1", e);
+				}
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+
+		System.out.println(10 / 2);
+
+	}
+}
+
+
+java.lang.ArithmeticException: / by zero
+	in.ashokit.LoginServlet.doPost(LoginServlet.java:61)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+
+throw:
+------
+
+to explicitly throw our own exception we will throw using throw keyword
+
+Syntax:
+
+throw <Exception Object>;
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10 / 1);
+
+		int div = 0;
+		try {
+			if (div != 0) {
+				System.out.println(10 / div);
+			}
+			else {
+				ArithmeticException e = new ArithmeticException("INput is 0");
+				throw e;
+			}
+		} catch (ArithmeticException e) {
+         System.out.println(e.getMessage());
+		}
+
+	}
+}
+
+10
+INput is 0
+
+
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10 / 1);
+
+		int div = 0;
+		try {
+			if (div != 0) {
+				System.out.println(10 / div);
+			}
+			else {
+				ArithmeticException e = new ArithmeticException("INput is 0");
+				throw e;
+			}
+		} catch (ArithmeticException ex) {
+            throw ex;
+		}
+
+		System.out.println("Last line");
+	}
+}
+
+10
+Exception in thread "main" java.lang.ArithmeticException: INput is 0
+	at A.main(A.java:12)
+
+
+
+public class A {
+	public static void main(String[] args) {
+		System.out.println(10 / 1);
+
+		int div = 0;
+		try {
+			if (div != 0) {
+				System.out.println(10 / div);
+			}
+			else {
+				ArithmeticException e = new ArithmeticException("INput is 0");
+				throw e;
+			}
+		} catch (ArithmeticException ex) {
+           // throw ex;
+		}
+
+		System.out.println("Last line");
+	}
+}
+
+Result:
+-------
+10
+Last line
+
+Custom exception:
+----------------
+
+public class AgeNotValidException extends RuntimeException {
+
+
+
+	String message;
+
+	public AgeNotValidException(String message) {
+		this.message = message;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "AgeNotValidException [message=" + message + "]";
+	}
+}
+
+
+
+
+public class A {
+	
+	public void validateAge(int age) {
+		
+		if(age>18) {
+			System.out.println("Proceed Next");
+		}
+		else{
+			throw new AgeNotValidException("Age is not valid");
+		}
+		
+	}
+	public static void main(String[] args) {
+		
+		A a = new A();
+		
+		try {
+		a.validateAge(0);
+		}
+		catch (AgeNotValidException e) {			
+			e.printStackTrace();
+			
+		}
+	}
+}
+
+
+finally:
+-------
+
+Irrespective of try catch if we want to execute any piece of code
+we have write inside finally block.
+
+try{
+	//java code
+	//Open a DB Connection
+	// SQL opeartion
+
+}
+catch(Exception e){
+	//handling and  exception
+}
+finally{
+	//Any piece of code that is required to execute irrespective
+	try and catch
+   //close
+}
+
+void	close()
+Closes this scanner.
+
+import java.util.Scanner;
+
+public class A {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Input For Div");
+
+		try {
+			int nextInt = sc.nextInt();
+			System.out.println(10 / nextInt);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		finally {
+			System.out.println("Finally Block is executed");
+			sc.close();
+		}
+
+	}
+}
+
+
+Enter Input For Div
+0
+java.lang.ArithmeticException: / by zero
+Finally Block is executed
+	at A.main(A.java:13)
+
+
+import java.util.Scanner;
+
+public class A {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Input For Div");
+
+		try {
+			int nextInt = sc.nextInt();
+			System.out.println(10 / nextInt);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		finally {
+		 try {
+			Thread.sleep(5000);
+			System.out.println("Finally Block is executed");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		}
+
+	}
+}
+
+
+
+import java.util.Scanner;
+
+public class A {
+
+	public void div(int number) {
+		
+		try {
+			System.out.println(10 / number);
+			return;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		finally {
+			System.out.println("Finally Block is executed");
+		}
+	}
+	
+	public static void main(String[] args) {
+
+         A a = new A();
+         a.div(5);
+
+	}
+}
+
+
+2
+Finally Block is executed
+
+throws 
+------
+
+Handle chekced exception.
+
+
+import java.io.IOException;
+
+public class A {
+
+	public void m1() throws IOException{
+		System.in.read();
+	}
+	
+	public void m2()throws IOException {
+		m1();
+	}
+	
+	public static void main(String[] args) {
+
+	A a = new A();
+	try {
+		a.m2();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+
+
+	}
+}
+
+
+Exception Exception is not compatible with throws clause in A.div()
+
+
+
+import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class B {
+
+	public void div() throws SQLException {
+
+		DriverManager.registerDriver(null);
+	}
+
+	public static void main(String[] args) {
+
+		B b = new B();
+
+		try {
+			b.div();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+
+	}
+}
+
+
+
+
+Exception SQLException is not compatible with throws clause in A.div()
+
+import java.io.IOException;
+
+public class A {
+
+	public void div() throws IOException {
+		
+		  System.in.read();
+	}
+
+}
+
+
+import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class B extends A{
+
+@Override
+public void div() throws SQLException {
+	// TODO Auto-generated method stub
+	super.div();
+}
+	public static void main(String[] args) {
+
+	}
+}
