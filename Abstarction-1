@@ -1,0 +1,157 @@
+import java.io.IOException;
+
+public class A {
+
+ public int div(int number) {
+	 
+	try {
+		System.out.println(number/2);
+		return 10;
+	} 
+	catch (Exception e) {
+		return 0;
+	}
+	finally {
+		System.out.println("test");
+	}
+	 
+ }
+public static void main(String[] args) {
+	
+	A a = new A();
+	a.div(10);
+}
+}
+
+Exception Handling on Overiding:
+--------------------------------
+
+Case 1 : If parent does not declare exception
+case 2 : If parent class declare and exception
+
+Case 1 : If parent does not declare exception
+
+Rule -1:
+If a parent does not throw any exception in java child cannot throw checked exception.
+
+Rule -2:
+If a parent does not throw any exception in java child class throw Runtime Exception
+
+
+case 2: If parent class declare and exception]
+
+Rule -1:
+If a parent  class throw any checked exception in java child can throw same exception
+
+Rule -2:
+If a parent  class throw any checked exception in java child we cannot throw  another checked exception. (same type and its child classes)
+
+Rule -3:
+If a parent  class throw any un-checked exception in java child we cannot throw  another checked exception.
+
+Rule -4:
+If a parent  class throw any runtime exception in java child we can  throw  any runtime exception.
+
+Abstraction in Java:
+--------------------
+Method Hiding
+Hiding al the details ann displaying the functionlity.
+
+Concrete Method vc Abstract Method
+
+Concrete Class  vs  Abstarct class
+
+class A{
+	
+	public void m1(){
+	//Method Body
+	}
+}
+
+abstract class A{
+	
+  public abstract void m1();
+
+}
+
+Example:
+public abstract class  A {
+
+	abstract   void  m1() ;
+	
+	abstract   void  m2() ;
+	
+}
+
+
+public abstract class B extends A{
+
+	@Override
+	void m1() {
+		System.out.println("we are in m1");
+	}
+
+}
+
+
+
+public class C extends B {
+
+	@Override
+	void m2() {
+		System.out.println("we are in m2");
+
+	}
+
+}
+
+
+public class App {
+
+ public static void main(String[] args) {
+	
+	 A  a = new C();
+	 a.m1();
+	 a.m2();
+	 
+}
+}
+
+
+public abstract class  A {
+
+
+	public static abstract     void  m1() ;
+	
+	abstract   void  m2() ;
+	
+}
+
+Note :
+
+Static method overidng is not allowed.
+
+public abstract class  A {
+
+
+	public final abstract     void  m1() ;
+	
+	abstract   void  m2() ;
+	
+}
+
+Note:
+final means overding is not allowed but is abstraction overriding in mandatory
+
+public final abstract class  A {
+
+
+	public  abstract     void  m1() ;
+	
+	abstract   void  m2() ;
+	
+}
+
+Note:
+For abtracttion overriding(IS-A relation) is required,
+but if it final Inheritance is not allowed.
