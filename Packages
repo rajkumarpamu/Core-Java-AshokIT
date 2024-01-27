@@ -1,0 +1,148 @@
+
+Can we make an abtract class as final ? No (Inheritance is not possible)
+Can we make an abtract method  as final ? No(Overriding is not possible)
+Can we create an Object to an Abstract class?
+No we cannot create an object to abstract class.
+
+public abstract class A {
+	public abstract void m1();
+	public void m2() {
+	}
+}
+
+
+public  class B extends A{
+	@Override
+	public void m1() {
+		System.out.println("we are in m1 :");
+	}
+	public static void main(String[] args) {	
+		A a = new B();
+		a.m1();
+		a.m2();		
+	}
+	
+}
+
+can we have  constructor in abtract class?
+
+public abstract class A {
+    int a;
+	
+	public A(int a) {
+        this.a=a;
+	}
+	public abstract void m1();
+
+	public void m2() {
+
+	}
+	
+}
+
+
+public  class B extends A{
+	public B() {
+		super(10);
+	}
+
+	@Override
+	public void m1() {
+		System.out.println("we are in m1 :");
+	}
+
+	public static void main(String[] args) {	
+		A a = new B();
+		a.m1();
+		a.m2();		
+	}
+	
+}
+
+package statement:
+------------------
+
+package statetemnt;
+import statements;
+
+public class <classname>{
+	
+
+
+}
+
+synatx:
+------
+
+package <package-name>;
+
+
+-d <directory>               Specify where to place generated class files
+
+
+package  com.ashokit.packageconcept;
+public class App{
+  public void m1(){
+     System.out.println("we are in m1");
+  }
+  public static void main(String ar[]){
+  App a = new App();
+  a.m1();
+  }
+}
+
+
+D:\Core-Java-7AM>javac -d . App.java
+D:\Core-Java-7AM>java com.ashokit.packageconcept.App
+we are in m1
+
+D:\Core-Java-7AM>
+
+D:\Core-Java-7AM>javac -d D:\Core-Java-7AM\packages App.java
+
+D:\Core-Java-7AM>cd packages
+
+D:\Core-Java-7AM\packages>java com.ashokit.packageconcept.App
+we are in m1
+
+D:\Core-Java-7AM\packages>
+
+
+Built in pacakge:
+java.lang
+java.io
+java.util
+java.applet
+
+user defined
+com.ashokit
+
+
+classnotfoundexception -> 
+noclassdefounderror  -> 
+
+
+D:\Core-Java-7AM>javac -d D:\Core-Java-7AM\packages Sample.java
+
+D:\Core-Java-7AM>cd packages
+
+D:\Core-Java-7AM\packages>java com.ashokit.testconcept.Sample
+we are in m1
+
+D:\Core-Java-7AM\packages>java com.ashokit.testconcept.App1
+we are in m1
+
+D:\Core-Java-7AM\packages>
+
+
+package com.ashokit.test;
+
+public class First {
+
+}
+
+
+
+
+
+
