@@ -1,0 +1,28 @@
+
+Modifiers/Access Specifiers:
+----------------------------
+Class Level
+default:
+We can access only with in same package
+1)By creating 	object in sane class
+2)Same package sub class 
+3)Same package by creating object in other class
+
+Outside the package it is not allowed.
+
+public
+
+Inside and Oustide the package we can access either by creating objects or through inheritance
+
+
+1)
+
+Member level modifeirs
+----------------------
+private
+protected
+
+Illegal modifier for the class A; only public, abstract & final are permitted
+
+private
+protected
