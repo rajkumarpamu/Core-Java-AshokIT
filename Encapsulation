@@ -1,0 +1,206 @@
+Import Statement:
+-----------------
+
+
+import <packagename.subpackage.classsname>;
+
+ex:
+
+import java.io.BUffereredReader;
+
+
+import <packagename.subpackage1.subpackage2.*>;
+
+
+
+package <packagename>;
+import   <>;
+import   <>;
+
+class  <classname>{
+	
+}
+
+
+
+class B {
+
+	public static void main(String[] args) {
+
+			A a = new A();
+		    a.m1();
+
+		System.out.println(Math.pow(2, 3));
+
+	}
+
+}
+
+CE:
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	A cannot be resolved to a type
+	A cannot be resolved to a type
+	at com.access.b.B.main(B.java:9)
+
+or 
+
+Cannot find symbol
+
+
+package com.access.b;
+import  com.access.a.*;
+ class B {
+	 
+	  public static void main(String[] args) {
+		
+		  A a = new A();
+		  a.m1();
+		  
+	}
+  
+}
+
+
+package com.access.b;
+import  com.access.a.A;
+import java.lang.Math;
+ class B { 
+	  public static void main(String[] args) {
+		  A a = new A();
+		  a.m1();		  
+		  System.out.println(Math.pow(2, 3));
+		  
+	}
+  
+}
+
+
+ctrl+shift+o   = Optimise Imports
+ctrl+shift+f   = Formatting
+ctrl+shift+/   = Multi line comment
+ctrl+shift+\   = Uncomment
+main   -> 
+sysout
+
+
+
+package com.access.b;
+
+import static java.lang.System.*;
+
+class B {
+
+	public static void main(String[] args) {
+
+		out.println("statement-1");
+		out.println("statement-1");
+		out.println("statement-1");
+		out.println("statement-1");
+		out.println("statement-1");
+		out.println("statement-1");
+		out.println("statement-1");
+
+	}
+
+}
+
+If we are accessing static members of a class multilple time we can access the members directly using static import.
+
+import static java.lang.System.*;
+
+
+
+Encapsulation:
+-------------]
+
+Data Hiding
+Data security
+
+Rule-1:
+Make fields/data members as private
+Rule-2:
+We have access only through public setter (sets the data to the field) and public getter (gets the data from the field)
+
+Model classess / Pojo classes
+
+package com.access.a;
+
+public class Employee {
+
+	private String name;
+	private int id;
+	private double salary;
+	
+	public void setName(String name) {
+		if(name.length()>0)
+		this.name=name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+}
+
+
+package com.access.a;
+
+public class App {
+
+	
+	public static void main(String[] args) {
+		
+		Employee emp = new Employee();
+		emp.setName("sachin");		
+		String name = emp.getName();
+		System.out.println(name);
+		
+	}
+}
+
+
+package com.access.a;
+
+public class Employee {
+
+	private String name;
+	private String id;
+	private double salary;
+	
+	public String getId() {
+		String s1 = id.replace('A', 'x');
+		String s2 = s1.replace('4', 'x');
+		return s2;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public void setName(String name) {
+		if(name.length()>0)
+		this.name=name;
+	}
+	
+	public String getName() {
+  return name;
+	}
+	
+}
+
+package com.access.a;
+
+public class App {
+
+	
+	public static void main(String[] args) {
+		
+		Employee emp = new Employee();
+		emp.setId("A1234");
+		
+		String id = emp.getId();
+		System.out.println(id);
+		
+	}
+}
