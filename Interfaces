@@ -1,0 +1,378 @@
+Interfaces:
+----------
+
+100 %  Abstarction
+Multiple Inheritance in Java
+
+
+class:
+-----
+
+public class <classname>{
+	
+}
+
+.java
+.class
+interface:
+-----------
+
+public interface <interfacename>{
+	
+}
+.java
+.class
+
+
+package com.demo.interfaces;
+
+public interface  A {
+
+	
+	public static void main(String[] args) {
+		  System.out.println("test");
+	}
+}
+
+
+'implements' keyowrd is used to redefine the interace methods
+
+Note:
+
+By default interface methods are public and abstract
+
+package com.demo.interfaces;
+
+public interface  A {
+
+    public abstract void m1() ;
+    public abstract void m2() ;
+}
+
+
+package com.demo.interfaces;
+
+public class AImpl implements A {
+
+	@Override
+	public void m1() {
+		System.out.println("we are in m1");	
+	}
+
+	@Override
+	public void m2() {
+		System.out.println("we are in m2");		
+	}
+
+}
+
+
+package com.demo.interfaces;
+
+public class App {
+
+	public static void main(String[] args) {
+		A a = new AImpl();
+		a.m1();
+		a.m2();	
+	}
+}
+
+
+
+package com.demo.interfaces;
+
+public interface  A {
+
+    public abstract void m1() ;
+    public abstract void m2() ;
+}
+
+
+package com.demo.interfaces;
+
+public abstract class AImpl implements A {
+	@Override
+	public void m1() {
+		System.out.println("we are in m1");	
+	}
+}
+
+
+package com.demo.interfaces;
+public class CImpl extends AImpl {
+	@Override
+	public void m2() {
+		System.out.println("we are in m2");
+
+	}
+}
+
+package com.demo.interfaces;
+public class App {
+	public static void main(String[] args) {
+		A a = new CImpl();
+		a.m1();
+		a.m2();
+	}
+}
+
+
+package com.demo.interfaces;
+
+public interface  A {
+
+	int x=10;
+    public abstract void m1() ;
+    public abstract void m2() ;
+}
+
+
+
+package com.demo.interfaces;
+
+public abstract class AImpl implements A {
+	@Override
+	public void m1() {
+		System.out.println("we are in m1 :" +x);	
+	}
+}
+
+
+package com.demo.interfaces;
+public class CImpl extends AImpl {
+	@Override
+	public void m2() {
+		System.out.println("we are in m2 :"+x);
+
+	}
+}
+
+package com.demo.interfaces;
+
+public class App {
+	public static void main(String[] args) {
+		A a = new CImpl();
+		a.m1();
+		a.m2();
+		
+	}
+}
+
+we are in m1 :10
+we are in m2 :10
+
+
+package com.demo.interfaces;
+
+public interface  A {
+
+	public static final int course_fee=10000;
+    public abstract void m1() ;
+    public abstract void m2() ;
+}
+
+
+package com.demo.interfaces;
+public abstract class AImpl implements A {
+	@Override
+	public void m1() {
+		System.out.println("we are in m1 :" +course_fee);	
+	}
+}
+
+package com.demo.interfaces;
+public class CImpl extends AImpl {
+	@Override
+	public void m2() {
+		System.out.println("we are in m2 :" + course_fee);
+
+	}
+}
+
+
+Note:
+
+Interface variables are by default public static final
+
+
+FunctionalInterface
+-------------------
+
+@FunctionalInterface
+public interface  A {
+
+	public static final int course_fee=10000;
+    public abstract int m1(int a,int b) ;
+
+}
+
+Allows only single abstract method (SAM).
+
+Marker Interafaces (ZAM):
+-------------------
+
+It is used  mark a java class to enable certain functionality.
+
+Interface Cloneable
+A class implements the Cloneable interface to indicate to the Object.clone() method that it is legal for that method to make a field-for-field copy of instances of that class.
+
+class A implemenst Cloneable{
+	
+	int a=10;
+}
+
+Object.clone()
+
+Interface Serializable
+
+class A implements Serializable{
+	int a=10;
+}
+
+
+
+Multiple Inheritance:
+
+package com.demo.interfaces;
+
+
+public interface  A {
+
+	public static final int course_fee=10000;
+    public abstract void m1(int a,int b) ;
+
+}
+
+
+package com.demo.interfaces;
+
+public  class AImpl implements A,B {
+
+	@Override
+	public void m2() {
+		System.out.println("we are in m2");
+		
+	}
+
+	@Override
+	public void m1(int a, int b) {
+		System.out.println("we are in m1");
+	}
+
+}
+
+
+package com.demo.interfaces;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+	AImpl a = new AImpl();
+	a.m1(10, 20);
+	a.m2();
+		
+	}
+}
+
+
+
+package com.demo.interfaces;
+
+
+public interface  A {
+
+	public static final int course_fee=10000;
+    public abstract void m1(int a,int b) ;
+
+}
+
+
+package com.demo.interfaces;
+
+public interface B {
+
+    public abstract void m1(int a,int b) ;
+}
+
+
+package com.demo.interfaces;
+
+public  class AImpl implements A,B {
+
+	@Override
+	public void m1(int a, int b) {
+		System.out.println("we are in m1");
+	}
+
+}
+
+package com.demo.interfaces;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+	AImpl a = new AImpl();
+	a.m1(10, 20);
+		
+	}
+}
+
+Interface to Interface:
+-----------------------
+
+package com.demo.interfaces;
+
+
+public interface  A {
+
+	public static final int course_fee=10000;
+    public abstract void m1(int a,int b) ;
+
+}
+
+
+package com.demo.interfaces;
+
+public interface B extends A{
+
+    public abstract void m2(int a,int b) ;
+}
+
+
+package com.demo.interfaces;
+
+public  class AImpl implements B{
+
+	@Override
+	public void m1(int a, int b) {
+		System.out.println("we are in m1");
+	}
+
+	@Override
+	public void m2(int a, int b) {
+		System.out.println("we are in m2");
+		
+	}
+
+}
+
+
+package com.demo.interfaces;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+	AImpl a = new AImpl();
+	a.m1(10, 20);a.m2(10, 20);
+		
+	}
+}
+
+
+interface to interface -> extends
+interface to class     -> implements
+class  to class      -> extends
