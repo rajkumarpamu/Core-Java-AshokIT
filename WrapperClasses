@@ -1,0 +1,372 @@
+Wrapper Classes:
+------------------
+
+Converts primtive type to Object type
+String s= "10"; //Object is craeted , as String is class
+int a=20; //int is not a class its a keyword
+            java.lang
+
+byte        Byte
+short       Short
+int         Integer
+long        Long
+
+float       Float
+double      Double
+
+char        Character
+
+boolean     Boolean
+
+
+Object
+  exetnds
+Number
+  extends 
+[Byte, Short , Integer, Long,Float,Double]
+
+
+
+java.lang.Object
+    extends
+java.lang.Character
+
+java.lang.Object
+    extends
+java.lang.Boolean
+Integer:
+
+The Integer class wraps a value of the primitive type int in an object. 
+An object of type Integer contains a single field whose type is int.
+
+Integer(int value)
+Constructs a newly allocated Integer object that represents the specified int value.
+
+
+Integer(String s)
+Constructs a newly allocated Integer object that represents the int value indicated by the String parameter.
+
+
+static int	MAX_VALUE
+A constant holding the maximum value an int can have, 231-1.
+static int	MIN_VALUE
+A constant holding the minimum value an int can have, -231.
+static int	SIZE
+The number of bits used to represent an int value in two's complement binary form.
+static Class<Integer>	TYPE
+The Class instance representing the primitive type int.
+
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Integer i= new Integer(10);
+		System.out.println(i);
+		
+		System.out.println(Integer.MAX_VALUE);
+		System.out.println(Integer.MIN_VALUE);
+		System.out.println(Integer.SIZE);
+		
+	}
+}
+
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Integer i= new Integer(10);
+		System.out.println(i);
+		
+        double d = i.doubleValue();
+        System.out.println(d);
+		
+	}
+}
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Integer i = 10;
+		System.out.println(i);
+
+		double d = i.doubleValue();
+		System.out.println(d);
+		i = 20;
+		System.out.println(i);
+	}
+}
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		// Primitive to Object
+		int a = 10;
+		Integer i1 = new Integer(a);
+		System.out.println("Primitive :" + a);
+		System.out.println("Integer :" + i1);
+		System.out.println("HashCode :" + i1.hashCode());
+		
+		Integer i2 = a;
+		System.out.println("Primitive :" + a);
+		System.out.println("Integer :" + i2);
+		System.out.println("HashCode :" + i2.hashCode());
+	}
+}
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Integer i = 10;
+		double d = i.doubleValue();
+	    Double d1= d;
+	    System.out.println(d1);
+	}
+}
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Integer i = 10;
+	    Double d1= new Double(i.doubleValue());
+	    System.out.println(d1);
+	}
+}
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		
+		//Wrapping Boxing
+		Integer i = new Integer(10);
+		System.out.println("object type:"+i);
+		
+		//Unwrapping Unboxing
+		int i1 = i.intValue();
+		System.out.println("primtive:"+i1);
+	}
+}
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+	
+	public void dispaly(Integer a ,Integer b) {
+		System.out.println("a value :"+a);
+		System.out.println("b value :"+b);
+	}
+
+	public static void main(String[] args) {
+
+		Demo d = new Demo();
+		Integer i1 = new Integer(10);
+		Integer i2 = new Integer(20);
+		d.dispaly(i1, i2);
+		
+	}
+}
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+	
+	public void dispaly(Integer a ,Integer b) {
+		System.out.println("a value :"+a);
+		System.out.println("b value :"+b);
+	}
+
+	public static void main(String[] args) {
+
+		Demo d = new Demo();
+		d.dispaly(10, 20);
+		
+	}
+}
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+	
+	public void dispaly(int a ,int b) {
+		System.out.println("a value :"+a);
+		System.out.println("b value :"+b);
+	}
+
+	public static void main(String[] args) {
+
+		Demo d = new Demo();
+		Integer i1= new Integer(10);
+		Integer i2 = new Integer(20);
+		d.dispaly(i1,i2);
+		
+	}
+}
+
+
+
+
+Boxing - Converting Primtive to Object
+Unboxing - converting object to primitive
+Autoboxing - Automatic conversion of primitive to object / object to primtive
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Integer i1 =new Integer("10");
+		System.out.println(i1);
+		
+		int i2= i1;
+		System.out.println(i2);
+
+	}
+}
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Integer i1 =new Integer("raj");
+		System.out.println(i1);
+		
+		int i2= i1;
+		System.out.println(i2);
+
+	}
+}
+
+Exception in thread "main" java.lang.NumberFormatException: For input string: "raj"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:668)
+	at java.base/java.lang.Integer.<init>(Integer.java:1127)
+	at com.demo.wrapperclasses.Demo.main(Demo.java:7)
+
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Integer i1 =new Integer("raj");
+		System.out.println(i1);
+		
+		int i2= i1;
+		System.out.println(i2);
+
+	}
+}
+
+
+
+Boolean(boolean value)
+Allocates a Boolean object representing the value argument.
+
+Boolean(String s)
+Allocates a Boolean object representing the value true if the string argument is not null and is equal, ignoring case, to the string "true".
+
+
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Boolean b1 = false;
+		System.out.println(b1);
+
+		boolean b2 = b1;
+		System.out.println(b2);
+
+	}
+}
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Boolean b1 = new Boolean("sachin");
+		System.out.println(b1);
+
+		boolean b2 = b1;
+		System.out.println(b2);
+
+	}
+}
+
+
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Boolean b1 = new Boolean("TRUE");
+		System.out.println(b1);
+
+		boolean b2 = b1;
+		System.out.println(b2);
+
+	}
+}
+
+
+Character(char value)
+Constructs a newly allocated Character object that represents the specified char value.
+
+
+package com.demo.wrapperclasses;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		
+		Character c = new Character('a');
+		System.out.println(c);
+		Character c = new Character(10);
+		System.out.println(c);
+
+	}
+}
