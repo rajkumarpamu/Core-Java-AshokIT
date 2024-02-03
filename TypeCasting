@@ -1,0 +1,248 @@
+Type Casting:
+-----------
+data types:
+
+byte short int long float double boolean char
+
+Conevrting Smaller data type value to Bigger data type (Implicit Conversion/Implicit Typacasting) / Widening
+
+package com.demo.typecasting;
+public class TypeCasting {
+	public static void main(String[] args) {
+		//size = 1 byte
+		byte b =10;
+		//size = 2 byte
+		short s= b;
+	    System.out.println(s); 
+	    //size 2 bytes
+	    char c='s';
+	    //size 4 bytes
+	    int s1 = c;
+	    //size 4 bytes
+	    float s2=s1;
+	  //size 4 bytes
+	    double s3=s2;
+	}
+}
+
+
+package com.demo.typecasting;
+
+public class TypeCasting {
+	
+	public static void main(String[] args) {
+		//size = 4 bytes
+		int i1= 10;
+		//size = 1 bytes
+		byte b1 = i1;
+	}
+
+}
+
+
+
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+	Type mismatch: cannot convert from int to byte
+
+	at com.demo.typecasting.TypeCasting.main(TypeCasting.java:9)
+
+Explicit Type casting:
+------------------
+
+package com.demo.typecasting;
+
+public class TypeCasting {
+	
+	public static void main(String[] args) {
+		//size = 4 bytes
+		int i1= 10;
+		//size = 1 bytes  a b =(c)d;
+		byte b1 =(byte) i1;
+		System.out.println(b1);
+	}
+
+}
+
+
+package com.demo.typecasting;
+
+public class TypeCasting {
+	
+	public static void main(String[] args) {
+
+		double d = 10.9;
+		int i1= (int)d;
+		System.out.println(i1);
+	}
+
+}
+
+
+package com.demo.typecasting;
+
+public class TypeCasting {
+
+	public static void main(String[] args) {
+
+		int i1 = 129;
+
+		byte b1 = (byte) i1;
+		System.out.println(b1);
+
+	}
+
+}
+
+
+Class casting:
+-------------
+Rule: IS-A Relation Ship (extends)
+
+Number(Parent) n = new  Integer(Child) (Upcasting) (Implicit)
+Integer(Child) n1 = new  Number(Parent) (DownCasting) (Explicit)
+
+Number s = new String();
+
+
+Parent p = new Child();  //Allowed 
+
+Child c= new Parent();// Not allowed
+package com.demo.typecasting;
+
+public class TypeCasting {
+	public static void main(String[] args) {
+		Number n1 = new Integer(10);
+		System.out.println(n1);	
+		Number n2=20;
+		System.out.println(n2);
+	}
+
+}
+
+
+package com.demo.typecasting;
+
+public class TypeCasting {
+
+	public static void main(String[] args) {
+		 Integer i1 = 10;
+		 Double i2= i1;
+	}
+
+}
+
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+	Type mismatch: cannot convert from Integer to Double
+	at com.demo.typecasting.TypeCasting.main(TypeCasting.java:10)
+
+
+
+package com.demo.typecasting;
+
+public class TypeCasting {
+
+	public static void main(String[] args) {
+
+		Integer i1 = 10;
+		double i2 = i1.doubleValue();
+		Double i4 = i2;
+	}
+
+}
+
+
+public class TypeCasting {
+
+	public static void main(String[] args) {
+
+		Integer i1 = new Number();
+	}
+
+}
+
+
+
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from Number to Integer
+	Cannot instantiate the type Number
+
+	at com.demo.typecasting.TypeCasting.main(TypeCasting.java:7)
+
+
+package com.demo.typecasting;
+
+public class TypeCasting {
+	public static void main(String[] args) {
+		// Upcasting
+		Object o1 = new String("sachin");
+		// Down casting
+		String s1 = (String) o1;
+		System.out.println(s1);
+	}
+}
+
+
+package com.demo.typecasting;
+
+public class TypeCasting {
+
+	public Object m1(Object a) {
+		return a;
+	}
+
+	public static void main(String[] args) {
+
+		TypeCasting t1 = new TypeCasting();
+		Object i1 = t1.m1(new Integer(10));
+		Integer i2 = (Integer) i1;
+		System.out.println(i2);
+
+		Object d1 = t1.m1(new Double(10.8));
+		Double d2 = (Double) d1;
+		System.out.println(d2);
+
+		Object d3 = t1.m1(new String("sachin"));
+		String s2 = (String) d1;
+		System.out.println(s2);
+	}
+
+}
+
+Upcasting:
+Parent p = new Chiild(); 
+
+Downcasting:
+-----------
+
+Child c = (child)new Parent(); // Not allowed
+
+For Downcasting:
+-------------
+Step-1
+Perform Upcasting
+Parent p = new Child();
+Step-2
+Downcasting
+Child c = (child)p;
+
+package com.demo.typecasting;
+
+public class TypeCasting implements Cloneable {
+
+	int a = 10;
+
+	public static void main(String[] args) throws CloneNotSupportedException {
+
+		TypeCasting t = new TypeCasting();
+		// Creates and returns a copy of this object
+		Object o1 = t.clone();
+		TypeCasting t1 = (TypeCasting) o1;
+		System.out.println(t1.a);
+
+	}
+
+}
+
