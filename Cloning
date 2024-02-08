@@ -1,0 +1,194 @@
+Object  Class:
+getClass()
+toString()
+equals()
+hashCode()
+finalize()
+
+clone()
+-------
+Creating duplicate copy of existing Object
+Cloneable -> Marker Interface
+Handle Exception
+
+package com.demo;
+
+public class App {
+public static void main(String[] args) {
+	
+	Employee emp = new Employee();
+	System.out.println("Before:"+emp.x);
+	Employee emp1= emp;
+	emp1.x=20;
+	System.out.println(emp1.x);
+	System.out.println("After :"+emp.x);
+	
+}
+}
+
+clone()
+-------
+
+package com.demo;
+
+public class Employee implements Cloneable{
+
+	int x=10;
+	
+	public static void main(String[] args) throws CloneNotSupportedException {
+		Employee emp = new Employee();
+		Object obj = emp.clone();
+		Employee emp1 =(Employee)obj;
+		emp1.x=20;
+		System.out.println("emp :"+emp.x);
+		System.out.println("emp1 :"+emp1.x);
+	}
+}
+
+Field to Field Copy
+
+Shallow Cloning:
+------------
+
+Field to Feild Mapping will happen only primitive type
+
+For Object types Field to Field Mapping will not happen.
+
+Deep cloning:
+-----------
+
+Ovveride the clone();
+package com.demo;
+
+public class Address implements Cloneable {
+
+	String city;
+
+	public Address(String city) {
+		this.city = city;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [city=" + city + "]";
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
+}
+
+
+
+package com.demo;
+
+public class Employee implements Cloneable {
+	String name;
+	Address address;
+	
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", address=" + address + "]";
+	}
+
+	public Employee(Address address, String name) {
+		this.address = address;
+		this.name = name;
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		
+		//Employee Duplicate Copy
+		Employee dupObj= (Employee)super.clone();
+		Address dupAddress = (Address) dupObj.address.clone();
+		dupObj.address=dupAddress;
+		return o1;
+		
+	}
+	
+
+	public static void main(String[] args) throws CloneNotSupportedException {
+		
+		Employee emp = new Employee(new Address("Hyd"), "raj");
+		System.out.println(emp);
+		
+		Employee emp1 = (Employee)emp.clone();
+		System.out.println(emp1);
+		
+		emp1.address.city="Banglore";
+		System.out.println(emp);
+		
+	}
+}
+
+
+package com.demo;
+
+public class Employee implements Cloneable {
+	String name;
+	Address address;
+	
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", address=" + address + "]";
+	}
+
+	public Employee(Address address, String name) {
+		this.address = address;
+		this.name = name;
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		//Employee Duplicate Copy
+		Employee dupObj= (Employee)super.clone();
+		//Address Duplicte copy
+		Address dupAddress = (Address) dupObj.address.clone();
+		//Assigning Duplicate Address to Duplicate Employee Object
+		dupObj.address=dupAddress;
+		return dupObj;
+	}
+	
+
+	public static void main(String[] args) throws CloneNotSupportedException {
+		
+		Employee emp = new Employee(new Address("Hyd"), "raj");
+		System.out.println(emp);
+		
+		Employee emp1 = (Employee)emp.clone();
+		System.out.println(emp1);
+		
+		emp1.address.city="Banglore";
+		System.out.println(emp);
+		
+	}
+}
+
+
+package com.demo;
+
+public class Address implements Cloneable {
+
+	String city;
+
+	public Address(String city) {
+		this.city = city;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [city=" + city + "]";
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
+}
+
+
+
