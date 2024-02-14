@@ -1,0 +1,304 @@
+package demo.collections;
+
+public class Employee<T1,T2> {
+
+	public void add(T1 a, T2 b) {
+		System.out.println(a);
+		System.out.println(b);
+	}
+
+	public static void main(String[] args) {
+		
+		Employee<Integer,Double> emp = new Employee();
+		emp.add(10, 20.0);
+		emp.add(10, 20.0);
+		
+		
+	}
+}
+
+
+
+package demo.collections;
+
+public class Employee<R> {
+
+	public void add(R a, R b) {
+		System.out.println(a);
+		System.out.println(b);
+	}
+
+	public static void main(String[] args) {
+		
+		Employee<Integer> emp = new Employee<Integer>();
+		emp.add(10, 20);
+		emp.add(10, 20);
+		
+	}
+}
+
+
+package demo.collections;
+import java.util.List;
+import java.util.ArrayList;
+public class ListDemo {
+	
+	public static void main(String[] args) {
+		
+		List list = new ArrayList();
+		list.add(10);
+		list.add(10.9);
+		list.add("sachin");
+		list.add('c');
+		
+		System.out.println(list);
+		
+		
+	}
+
+}
+
+
+
+package demo.collections;
+import java.util.List;
+import java.util.ArrayList;
+public class ListDemo {
+	
+	public static void main(String[] args) {
+		
+		List<Integer> list = new ArrayList();
+		list.add(new Integer(10));
+		list.add(new Integer(11));
+		list.add(new Integer(12));
+		list.add(new Integer(13));
+
+		
+		System.out.println(list);
+		
+		
+	}
+
+}
+
+package demo.collections;
+
+public class Employee {
+
+	String stuname;
+	Integer id;
+	String instituteName;
+
+	public Employee(String stuname, Integer id, String instituteName) {
+		super();
+		this.stuname = stuname;
+		this.id = id;
+		this.instituteName = instituteName;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [stuname=" + stuname + ", id=" + id + ", instituteName=" + instituteName + "]";
+	}
+
+}
+
+
+
+package demo.collections;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class ListDemo {
+
+	public static void main(String[] args) {
+
+		List<Employee> list = new ArrayList();
+		list.add(new Employee("raj", 1, "AshokIT"));
+		list.add(new Employee("kumar", 2, "AshokIT"));
+
+		System.out.println(list);
+
+	}
+
+}
+
+
+package demo.collections;
+
+import com.demo.Address;
+
+public class Employee {
+
+	String stuname;
+	Integer id;
+	String instituteName;
+	Address address;
+
+	public Employee(String stuname, Integer id, String instituteName, Address address) {
+		super();
+		this.stuname = stuname;
+		this.id = id;
+		this.instituteName = instituteName;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [stuname=" + stuname + ", id=" + id + ", instituteName=" + instituteName + ", address="
+				+ address + "]";
+	}
+
+}
+
+
+package com.demo;
+
+public class Address {
+
+	public Address(String street, String city) {
+		super();
+		this.street = street;
+		this.city = city;
+	}
+
+	private String street;
+	private String city;
+
+	@Override
+	public String toString() {
+		return "Address [street=" + street + ", city=" + city + "]";
+	}
+
+}
+
+
+package demo.collections;
+
+import java.util.List;
+
+import com.demo.Address;
+
+import java.util.ArrayList;
+
+public class ListDemo {
+
+	public static void main(String[] args) {
+
+		List<Employee> list = new ArrayList();
+		Address adress = new Address("apet", "hyd");
+		Employee emp = new Employee("raj", 1, "ashokit", adress);
+
+		list.add(emp);
+
+		System.out.println(list);
+
+	}
+
+}
+
+package demo.collections;
+
+import java.util.List;
+
+import com.demo.Address;
+
+public class Employee {
+
+	String stuname;
+	Integer id;
+	String instituteName;
+	List<Address> address;
+
+	public Employee(String stuname, Integer id, String instituteName, List<Address> address) {
+		super();
+		this.stuname = stuname;
+		this.id = id;
+		this.instituteName = instituteName;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [stuname=" + stuname + ", id=" + id + ", instituteName=" + instituteName + ", address="
+				+ address + "]";
+	}
+
+
+
+
+}
+
+
+ArrayList()
+Constructs an empty list with an initial capacity of ten
+
+
+
+package demo.collections;
+
+import java.util.List;
+
+import com.demo.Address;
+
+import java.util.ArrayList;
+
+public class ListDemo {
+
+	public static void main(String[] args) {
+
+		List<Integer> list = new ArrayList(3);
+		list.add(10);
+		list.add(20);
+		list.add(30);
+		list.add(10);
+
+		
+		System.out.println(list);
+
+	}
+
+}
+
+package demo.collections;
+
+import java.util.List;
+
+import com.demo.Address;
+
+public class Employee {
+
+	String stuname;
+	Integer id;
+	String instituteName;
+	List<Address> address;
+
+	public Employee(String stuname, Integer id, String instituteName, List<Address> address) {
+		super();
+		this.stuname = stuname;
+		this.id = id;
+		this.instituteName = instituteName;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [stuname=" + stuname + ", id=" + id + ", instituteName=" + instituteName + ", address="
+				+ address + "]";
+	}
+
+}
+
+
+[Employee [stuname=raj, id=1, instituteName=ashokit, address=[Address [street=apet, city=hyd], Address [street=kphb, city=hyd]]]]
+
+
+
+
+[Employee [stuname=raj, id=1, instituteName=ashokit, address=Address [street=apet, city=hyd]]]
+
+
+
+
+[Employee [stuname=raj, id=1, instituteName=AshokIT], Employee [stuname=kumar, id=2, instituteName=AshokIT]]
