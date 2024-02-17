@@ -1,0 +1,324 @@
+
+ * This class implements the {@code Set} interface, backed by a hash table
+
+ Key  value
+
+ * (actually a {@code HashMap} instance).  It makes no guarantees as to the
+ * iteration order of the set; in particular, it does not guarantee that the
+ * order will remain constant over time.  This class permits the {@code null}
+ * element.
+
+
+ package com.demo.collections;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+
+		HashSet<Integer> set = new HashSet<>();
+		set.add(11);
+		set.add(15);
+		set.add(18);
+		set.add(21);		
+		set.add(13);
+		set.add(10);
+		set.add(14);
+		System.out.println(set);
+		//[11, 15, 18, 21, 13, 10, 14]
+
+
+	}
+
+}
+
+
+package com.demo.collections;
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+
+		HashSet<Integer> set = new LinkedHashSet<>();
+		set.add(11);
+		set.add(15);
+		set.add(18);
+		set.add(21);		
+		set.add(13);
+		set.add(10);
+		set.add(14);
+		System.out.println(set);
+
+		
+	}
+
+}
+
+is implementation differs from
+ * {@code HashSet} in that it maintains a doubly-linked list running through
+ * all of its entries.  
+
+
+
+ /**
+ * A {@link NavigableSet} implementation based on a {@link TreeMap}.
+ * The elements are ordered using their {@linkplain Comparable natural
+ * ordering}, or by a {@link Comparator} provided at set creation
+ * time, depending on which constructor is used.
+
+package com.demo.collections;
+
+import java.util.Set;
+import java.util.TreeSet;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+
+		Set<Integer> set = new TreeSet<>();
+		set.add(11);
+		set.add(15);
+		set.add(18);
+		set.add(21);		
+		set.add(13);
+		set.add(10);
+		set.add(14);
+		System.out.println(set);
+	}
+
+}
+
+
+Exception in thread "main" java.lang.ClassCastException: class com.demo.collections.Employee cannot be cast to class java.lang.Comparable (com.demo.collections.Employee is in unnamed module of loader 'app'; java.lang.Comparable is in module java.base of loader 'bootstrap')
+	at java.base/java.util.TreeMap.compare(TreeMap.java:1569)
+	at java.base/java.util.TreeMap.addEntryToEmptyMap(TreeMap.java:776)
+	at java.base/java.util.TreeMap.put(TreeMap.java:785)
+	at java.base/java.util.TreeMap.put(TreeMap.java:534)
+	at java.base/java.util.TreeSet.add(TreeSet.java:255)
+	at com.demo.collections.CollectionsDemo.main(CollectionsDemo.java:11)
+
+
+
+
+
+
+
+
+
+	[Employee [id=1, name=raj, institute=ashokit], Employee [id=2, name=raj, institute=ashokit], Employee [id=4, name=raj, institute=ashokit], Employee [id=5, name=raj, institute=ashokit], Employee [id=6, name=raj, institute=ashokit]]
+
+[Employee [id=6, name=raj, institute=ashokit], Employee [id=5, name=raj, institute=ashokit], Employee [id=4, name=raj, institute=ashokit], Employee [id=2, name=raj, institute=ashokit], Employee [id=1, name=raj, institute=ashokit]]
+
+
+
+
+
+
+Note:
+
+the value 0 if this Integer is equal to the argument Integer; a value less than 0 if this Integer is numerically less than the argument Integer; and a value greater than 0 if this Integer is numerically greater than the argument Integer (signed comparison)
+
+package com.demo.collections;
+
+import java.util.Objects;
+
+public class Employee extends Object implements Comparable<Employee> {
+
+	Integer id;
+	String name;
+	String institute;
+
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Employee other = (Employee) obj;
+		return id.equals(id);
+	}
+
+	public Employee(Integer id, String name, String institute) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.institute = institute;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", institute=" + institute + "]";
+	}
+
+	@Override
+	public int compareTo(Employee o) {
+		if (id > o.id) {
+			System.out.println(id);
+			System.out.println(o.id); //2 4 
+			return 1;
+		} else if (id < o.id) {
+			return -1;
+		} else {
+			return 0;
+		}
+
+	}
+
+}
+
+
+package com.demo.collections;
+
+import java.util.Set;
+import java.util.TreeSet;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+
+		Set<Employee> set = new TreeSet<>();
+		set.add(new Employee(2, "raj", "ashokit"));
+		set.add(new Employee(1, "raj", "ashokit"));
+		set.add(new Employee(4, "raj", "ashokit"));
+		set.add(new Employee(6, "raj", "ashokit"));
+		set.add(new Employee(5, "raj", "ashokit"));
+		set.add(new Employee(1, "raj", "ashokit"));
+		System.out.println(set);
+	}
+
+}
+
+package com.demo.collections;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+
+		Set<Employee> set = new HashSet<>();
+		set.add(new Employee(2, "raj", "ashokit"));
+		set.add(new Employee(1, "raj", "ashokit"));
+		set.add(new Employee(4, "raj", "ashokit"));
+		set.add(new Employee(6, "raj", "ashokit"));
+		set.add(new Employee(5, "raj", "ashokit"));
+		set.add(new Employee(1, "raj", "ashokit"));
+		
+		TreeSet t = new TreeSet<>(set);
+		System.out.println(set);
+	}
+
+}
+
+package com.demo.collections;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+
+		List<Employee> list = new ArrayList<>();
+		list.add(new Employee(2, "raj", "ashokit"));
+		list.add(new Employee(1, "raj", "ashokit"));
+		list.add(new Employee(4, "raj", "ashokit"));
+		list.add(new Employee(6, "raj", "ashokit"));
+		list.add(new Employee(5, "raj", "ashokit"));
+		list.add(new Employee(1, "raj", "ashokit"));
+
+		Collections.sort(list);
+		System.out.println(list);
+	}
+
+}
+
+
+package com.demo.collections;
+
+import java.util.Objects;
+
+public class Employee extends Object implements Comparable<Employee> {
+
+	Integer id;
+	String name;
+	String institute;
+
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Employee other = (Employee) obj;
+		return id.equals(id);
+	}
+
+	public Employee(Integer id, String name, String institute) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.institute = institute;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", institute=" + institute + "]";
+	}
+
+	@Override
+	public int compareTo(Employee o) {
+		if (id < o.id) {
+			System.out.println(id);
+			System.out.println(o.id); //2 4 
+			return 1;
+		} else if (id > o.id) {
+			return -1;
+		} else {
+			return 0;
+		}
+
+	}
+
+}
+
+package com.demo.collections;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+
+		List<Employee> list = new ArrayList<>();
+		list.add(new Employee(2, "raj", "ashokit"));
+		list.add(new Employee(1, "raj", "ashokit"));
+		list.add(new Employee(4, "raj", "ashokit"));
+		list.add(new Employee(6, "raj", "ashokit"));
+		list.add(new Employee(5, "raj", "ashokit"));
+		list.add(new Employee(1, "raj", "ashokit"));
+
+		Object[] array = list.toArray();
+		Collections.sort(list);
+		System.out.println(list);
+	}
+
+}
+
+Constructs a new tree set containing the elements in the specified
+     * collection, sorted according to the <i>natural ordering</i> of its
+     * elements.  All elements inserted into the set must implement the
+     * {@link Comparable} interface. 
