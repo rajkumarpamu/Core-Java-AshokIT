@@ -1,0 +1,201 @@
+Map:
+----
+
+key       value
+raj      123        Map
+ramu     124
+ravi     125
+
+
+Group of individual object as a key value pair
+key object
+Value object   Entry
+
+HashMap
+HashMap()
+Constructs an empty HashMap with the default initial capacity (16) and the default load factor (0.75).
+
+
+package com.demo.collections;
+
+import java.util.HashMap;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("FB", "A");
+		map.put("LD", "B");
+		map.put("Ea", "C");
+		
+		System.out.println(30&5);
+		System.out.println(20&5);
+
+		System.out.println("raj".hashCode() & 15);
+		System.out.println("ravi".hashCode() & 15);
+		System.out.println("ramu".hashCode() & 15);
+		System.out.println("rak".hashCode() & 15);
+		
+	}
+
+}
+
+
+
+package com.demo.collections;
+
+import java.util.HashMap;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("raj", "A");
+		map.put("ravi", "B");
+		map.put("ramu", "C");
+
+		System.out.println("raj".hashCode() & 15);
+		System.out.println("ravi".hashCode() & 15);
+		System.out.println("ramu".hashCode() & 15);
+		
+		System.out.println(map);
+		
+		
+	}
+
+}
+package com.demo.collections;
+
+import java.util.HashMap;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+		HashMap<Integer, Employee> map = new HashMap<>();
+		map.put(1, new Employee("Raj", "AshokIt", "Java"));
+		map.put(2, new Employee("Ravi", "AshokIt", "Java"));
+
+		Employee employee = map.get(1);
+		System.out.println(employee);
+
+	}
+
+}
+
+
+package com.demo.collections;
+
+import java.util.HashMap;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+		HashMap<Phone, Employee> map = new HashMap<>();
+		map.put(new Phone(123), new Employee("Raj", "AshokIt", "Java"));
+		map.put(new Phone(124), new Employee("Ravi", "AshokIt", "Java"));
+
+		Employee employee = map.get(new Phone(124));
+		System.out.println(employee);
+
+	}
+
+}
+
+
+
+package com.demo.collections;
+
+import java.util.Objects;
+
+public class Phone {
+
+	Integer phoneNumber;
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(phoneNumber);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Phone other = (Phone) obj;
+		return Objects.equals(phoneNumber, other.phoneNumber);
+	}
+
+	public Phone(Integer phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "Phone [phoneNumber=" + phoneNumber + "]";
+	}
+
+}
+
+
+
+package com.demo.collections;
+
+import java.util.Objects;
+
+public class Phone {
+
+	Integer phoneNumber;
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(phoneNumber);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Phone other = (Phone) obj;
+		return Objects.equals(phoneNumber, other.phoneNumber);
+	}
+
+	public Phone(Integer phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "Phone [phoneNumber=" + phoneNumber + "]";
+	}
+
+}
+
+
+
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+	Cannot invoke hashCode() on the primitive type null
+
+	at com.demo.collections.CollectionsDemo.main(CollectionsDemo.java:16)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FB
+FD
+EA
