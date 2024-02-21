@@ -1,0 +1,129 @@
+{Phone [phoneNumber=123]=[Employee [name=a, institute=ashokIt, course=Java], Employee [name=b, institute=ashokIt, course=Java]]}
+[Employee [name=a, institute=ashokIt, course=Java], Employee [name=b, institute=ashokIt, course=Java]]
+
+
+package com.demo.collections;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+		HashMap<Phone, List<Employee>> map = new HashMap<>();
+		
+		List<Employee> empList= new ArrayList();
+		empList.add(new Employee("a", "ashokIt", "Java"));
+		empList.add(new Employee("b", "ashokIt", "Java"));
+		
+		Phone phone = new Phone(123);
+		
+		map.put(phone, empList);
+		
+		System.out.println(map);
+		
+		
+		List<Employee> list = map.get(new Phone(123));
+		System.out.println(list);
+
+
+	}
+
+}
+
+package com.demo.collections;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+		String s= "rajkumara";
+		char s1[]= s.toCharArray();
+		HashMap<Character,Integer> map = new HashMap<>();
+		for(int i=0;i<s1.length;i++) {
+			if(map.containsKey(s1[i])) {
+				map.put(s1[i], map.get(s1[i])+1);
+			}
+			else{
+				map.put(s1[i], 1);
+			}			
+		}
+		System.out.println(map);
+	}
+
+}
+
+{a=2, r=2, u=1, j=1, k=1, m=1}
+
+
+package com.demo.collections;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+		String s= "rajkumara";
+		char s1[]= s.toCharArray();
+		HashMap<Character,Integer> map = new HashMap<>();
+		for(int i=0;i<s1.length;i++) {
+			if(map.containsKey(s1[i])) {
+				map.put(s1[i], map.get(s1[i])+1);
+			}
+			else{
+				map.put(s1[i], 1);
+			}			
+		}	
+		System.out.println(map.entrySet());
+		Set<Entry<Character, Integer>> entrySet = map.entrySet();
+		Iterator<Entry<Character, Integer>> iterator = entrySet.iterator();
+		while(iterator.hasNext()) {
+			Entry<Character, Integer> entry = iterator.next();
+			if(entry.getValue() > 1) {
+				System.out.println("Duplicate is :"+entry.getKey());
+			}
+		}
+	}
+}
+
+
+
+package com.demo.collections;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+public class CollectionsDemo {
+
+	public static void main(String[] args) {
+		String s = "rajkumara";
+		char s1[] = s.toCharArray();
+		Map<Integer, String> map = new TreeMap<>();
+		map.put(4, "raj");
+		map.put(2, "raj");
+		map.put(1, "raj");
+		map.put(1, "ravi");
+		map.put(3, "raj");
+		System.out.println(map);
+
+	}
+}
+
+
+
+Exception in thread "main" java.lang.ClassCastException: class com.demo.collections.Phone cannot be cast to class java.lang.Comparable (com.demo.collections.Phone is in unnamed module of loader 'app'; java.lang.Comparable is in module java.base of loader 'bootstrap')
+	at java.base/java.util.TreeMap.compare(TreeMap.java:1569)
+	at java.base/java.util.TreeMap.addEntryToEmptyMap(TreeMap.java:776)
+	at java.base/java.util.TreeMap.put(TreeMap.java:785)
+	at java.base/java.util.TreeMap.put(TreeMap.java:534)
+	at com.demo.collections.CollectionsDemo.main(CollectionsDemo.java:12)
+
