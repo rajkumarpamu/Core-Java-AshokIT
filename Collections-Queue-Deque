@@ -1,0 +1,308 @@
+
+Collections:
+-----------
+
+List:
+Group Of individual object as a single object and allow duplicates
+
+ArrayList
+LinkedList
+
+Set
+Group Of individual object as a single object and not  duplicates
+
+HashSet (remove duplicates , no gurantee of insertion order) -> HashMap
+LinkedHashSeLinkedList, LinkedTransferQueue, PriorityBlockingQueue, PriorityQueue,t - Doubly Linked List
+TreeSet ->Remove Duplicates and sort the objects
+Intgeer,String -> Sort automatically
+They implements compraable Internaly
+For user defined object we need to implements Comprarable in the object we supply
+
+
+
+Interface Queue<E>:
+------------------
+FIFO operations:
+---------------
+First In First Out
+Bulk SMS
+Bulk Calls
+Bulk Emails
+
+LinkedList
+PriorityBlockingQueue
+PriorityQueue
+
+
+LinkedList:
+------------
+
+
+package demo.collections;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ListDemo {
+	public static void main(String[] args) {
+
+		Queue<Integer> queue = new LinkedList();
+		queue.add(1);
+		queue.add(2);
+		queue.add(3);
+		System.out.println(queue);
+		queue.add(4);
+		System.out.println(queue);
+		// Retrieves, but does not remove, the head of this queue,or returns null if
+		// this queue is empty.
+		Integer peeked = queue.peek();
+		System.out.println(peeked);
+		System.out.println(queue);
+
+	}
+
+
+
+	package demo.collections;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ListDemo {
+	public static void main(String[] args) {
+
+		Queue<Integer> queue = new LinkedList();
+		queue.add(1);
+		queue.add(2);
+		queue.add(3);
+		System.out.println(queue);
+		
+		Integer remove = queue.remove();
+		System.out.println(remove);
+		
+		
+		queue.add(4);
+		System.out.println(queue);
+		
+		// Retrieves, but does not remove, the head of this queue,or returns null if
+		// this queue is empty.
+		Integer peeked = queue.peek();
+		System.out.println(peeked);
+
+		System.out.println(queue);
+
+	}
+
+}
+
+
+[1, 2, 3]
+1
+[2, 3, 4]
+2
+[2, 3, 4]
+
+
+}
+
+package demo.collections;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ListDemo {
+	public static void main(String[] args) {
+
+		Queue<Integer> queue = new LinkedList<>();
+
+		for (int i = 1; i <= 5; i++) {
+			queue.add(i);
+		}
+		System.out.println("In queue :"+queue);
+		Integer delete = queue.remove();
+		System.out.println("Delete :"+delete);
+		System.out.println(queue);
+		//Retrieves, but does not remove, the head of this queue,or returns null if this queue is empty
+		int head = queue.peek();
+		System.out.println("Head element :"+head);
+		int size = queue.size();
+		System.out.println("Queue Size :"+size);
+		//Retrieves and removes the head of this queue,or returns null if this queue is empty
+		Integer result = queue.poll();
+		System.out.println("poll"+result);
+		System.out.println("Final Queue :"+queue);		
+		Iterator<Integer> iterator = queue.iterator();
+		
+		while(iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+
+	}
+
+}
+
+
+
+package demo.collections;
+
+import java.util.Iterator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class ListDemo {
+	public static void main(String[] args) {
+
+		Queue<Integer> queue = new PriorityQueue<>();
+
+		for (int i = 1; i <= 5; i++) {
+			queue.add(i);
+		}
+		
+		System.out.println("In queue :"+queue);
+		
+		Integer delete = queue.remove();
+		System.out.println("Delete :"+delete);
+		
+		System.out.println(queue);
+		
+		//Retrieves, but does not remove, the head of this queue,or returns null if this queue is empty
+		int head = queue.peek();
+		System.out.println("Head element :"+head);
+		
+		
+		int size = queue.size();
+		System.out.println("Queue Size :"+size);
+		
+		//Retrieves and removes the head of this queue,or returns null if this queue is empty
+		Integer result = queue.poll();
+		System.out.println("poll"+result);
+
+		System.out.println("Final Queue :"+queue);
+		
+		
+		
+		Iterator<Integer> iterator = queue.iterator();
+		
+		while(iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+		
+		
+		
+	}
+
+}
+
+
+package demo.collections;
+
+import java.util.Iterator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class ListDemo {
+	public static void main(String[] args) {
+
+		//Creates a PriorityQueue with the default initialcapacity (11) that orders its elements according to their natural 
+		Queue<Integer> queue = new PriorityQueue<>();
+		queue.add(10);
+		queue.add(20);
+		queue.add(15);
+		
+		System.out.println(queue.peek());
+		System.out.println(queue.poll());
+		System.out.println(queue.peek());
+
+	}
+
+}
+
+
+Note:
+Not thread safe
+
+Deque:
+-----
+
+Double ended Queue
+
+It will support addition or removal of elements from either end of the data strcuture
+
+(Queue/Stack)
+FIFO
+LIFO
+
+A linear collection that supports element insertion and removal at both ends. The name deque is short for "double ended queue".
+
+
+package demo.collections;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class ListDemo {
+	public static void main(String[] args) {
+
+		
+		Deque<Integer> deque= new ArrayDeque();
+		
+		deque.add(15);
+		deque.addFirst(10);		
+		deque.addLast(20);
+		
+		
+		System.out.println(deque);
+		
+		int first= deque.removeFirst();
+		int last= deque.removeLast();
+
+		
+		System.out.println(last);
+		System.out.println(first);
+
+		
+
+	}
+
+}
+
+
+
+package demo.collections;
+
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class ListDemo {
+	public static void main(String[] args) {
+
+		Deque<Integer> deque = new LinkedList();
+
+		deque.add(15);
+		deque.addFirst(10);
+		deque.addLast(20);
+		// Pushes an element onto the stack represented by this deque
+		deque.push(25);
+		// Inserts the specified element into the queue represented by this deque
+		deque.offer(19);
+		// Inserts the specified element at the front of this deque unless it
+		// wouldviolate capacity restrictions
+		deque.offerFirst(30);
+
+		deque.removeFirst();
+
+		deque.removeLast();
+
+		System.out.println(deque);
+
+	}
+
+}
+
+
+
+
+
+
+
