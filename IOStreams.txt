@@ -1,0 +1,215 @@
+IO streams:
+-----------
+
+java.io
+
+I - Input  -> readn operation ->InputStream
+O -  Output -> write operation ->OutputStream
+
+System.in   -> read
+System.out  - write
+System.err
+
+package com.demo.intro;
+
+public class DataTypesDemo {
+
+	public static void main(String[] args) {
+
+		String s = "sachin";
+
+		byte[] b = s.getBytes();
+		for (byte b1 : b) {
+			System.out.println(b1 + " ");
+		}
+
+	}
+}
+
+115 
+97 
+99 
+104 
+105 
+110 
+:
+
+OutputStream
+
+This abstract class is the superclass of all classes representing an output stream of bytes. An output stream accepts output bytes and sends them to some sink.
+
+Applications that need to define a subclass of OutputStream must always provide at least a method that writes one byte of output.
+
+InputStream
+
+This abstract class is the superclass of all classes representing an input stream of bytes.
+
+Applications that need to define a subclass of InputStream must always provide a method that returns (read) the next byte of input.
+
+File
+---
+FileInputStream ->read data from file
+
+the next byte of data, or  -1 if the end of the
+     *             file is reached.
+
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class ReadExample {
+	
+	public static void main(String[] args) throws IOException {
+		
+		File file = new File("sample.txt");
+		FileInputStream fis = new FileInputStream(file);
+		int i;
+		while((i = fis.read()) != -1 ) {
+			System.out.print((char)i);
+		}
+		
+	}
+
+}
+
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class WriteExample {
+
+	public static void main(String[] args) throws IOException {
+
+		File file = new File("test.txt");
+		FileOutputStream fos = new FileOutputStream(file);
+
+		String msg = "welcome to ashokit";
+		byte[] b = msg.getBytes();
+
+		fos.write(b);
+
+	}
+}
+
+
+FileOutputStream -> write the data to file+
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class ReadExample {
+
+	public static void main(String[] args) throws IOException {
+
+		File file1 = new File("sample.txt");
+		FileInputStream fis = new FileInputStream(file1);
+		File file2 = new File("sample2.txt");
+		FileOutputStream fos = new FileOutputStream(file2);
+		int i;
+		while ((i = fis.read()) != -1) {
+			fos.write(i);
+		}
+	}
+
+}
+
+
+charcter stream
+---------------
+
+FileWriter
+FileReader
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteExample {
+
+	public static void main(String[] args) throws IOException {
+
+		try {
+		File file = new File("test3.txt");
+		FileWriter fos = new FileWriter(file);
+		
+		String message= "welcome";
+		char ar []= message.toCharArray();
+
+		fos.write(ar);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+}
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ReadExample {
+
+	public static void main(String[] args) throws IOException {
+
+		File file1 = new File("sample2.txt");
+		FileReader fis = new FileReader(file1);
+		File file2 = new File("sample3.txt");
+		FileWriter fos = new FileWriter(file2);
+		int i;
+		while ((i = fis.read()) != -1) {
+			System.out.println((char)i);
+			fos.write(i);
+		}
+	}
+
+}
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteExample {
+
+	public static void main(String[] args) throws IOException {
+
+		try {
+		File file = new File("test3.txt");
+		FileWriter fos = new FileWriter(file);
+		
+		String message= "welcome";
+		char ar []= message.toCharArray();
+
+		fos.write(ar);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+}
