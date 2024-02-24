@@ -1,0 +1,509 @@
+IO streams:
+-----------
+
+java.io
+
+I - Input  -> readn operation ->InputStream
+O -  Output -> write operation ->OutputStream
+
+System.in   -> read
+System.out  - write
+System.err
+
+package com.demo.intro;
+
+public class DataTypesDemo {
+
+	public static void main(String[] args) {
+
+		String s = "sachin";
+
+		byte[] b = s.getBytes();
+		for (byte b1 : b) {
+			System.out.println(b1 + " ");
+		}
+
+	}
+}
+
+115 
+97 
+99 
+104 
+105 
+110 
+:
+
+OutputStream
+
+This abstract class is the superclass of all classes representing an output stream of bytes. An output stream accepts output bytes and sends them to some sink.
+
+Applications that need to define a subclass of OutputStream must always provide at least a method that writes one byte of output.
+
+InputStream
+
+This abstract class is the superclass of all classes representing an input stream of bytes.
+
+Applications that need to define a subclass of InputStream must always provide a method that returns (read) the next byte of input.
+
+File
+---
+FileInputStream ->read data from file
+
+the next byte of data, or  -1 if the end of the
+     *             file is reached.
+
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class ReadExample {
+	
+	public static void main(String[] args) throws IOException {
+		
+		File file = new File("sample.txt");
+		FileInputStream fis = new FileInputStream(file);
+		int i;
+		while((i = fis.read()) != -1 ) {
+			System.out.print((char)i);
+		}
+		
+	}
+
+}
+
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class WriteExample {
+
+	public static void main(String[] args) throws IOException {
+
+		File file = new File("test.txt");
+		FileOutputStream fos = new FileOutputStream(file);
+
+		String msg = "welcome to ashokit";
+		byte[] b = msg.getBytes();
+
+		fos.write(b);
+
+	}
+}
+
+
+FileOutputStream -> write the data to file+
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class ReadExample {
+
+	public static void main(String[] args) throws IOException {
+
+		File file1 = new File("sample.txt");
+		FileInputStream fis = new FileInputStream(file1);
+		File file2 = new File("sample2.txt");
+		FileOutputStream fos = new FileOutputStream(file2);
+		int i;
+		while ((i = fis.read()) != -1) {
+			fos.write(i);
+		}
+	}
+
+}
+
+
+charcter stream
+---------------
+
+FileWriter
+FileReader
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteExample {
+
+	public static void main(String[] args) throws IOException {
+
+		try {
+		File file = new File("test3.txt");
+		FileWriter fos = new FileWriter(file);
+		
+		String message= "welcome";
+		char ar []= message.toCharArray();
+
+		fos.write(ar);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+}
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ReadExample {
+
+	public static void main(String[] args) throws IOException {
+
+		File file1 = new File("sample2.txt");
+		FileReader fis = new FileReader(file1);
+		File file2 = new File("sample3.txt");
+		FileWriter fos = new FileWriter(file2);
+		int i;
+		while ((i = fis.read()) != -1) {
+			System.out.println((char)i);
+			fos.write(i);
+		}
+	}
+
+}
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteExample {
+
+	public static void main(String[] args) throws IOException {
+
+		try {
+		File file = new File("test3.txt");
+		FileWriter fos = new FileWriter(file);
+		
+		String message= "welcome";
+		char ar []= message.toCharArray();
+
+		fos.write(ar);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+}
+
+try{
+	
+}
+catch(){}
+finally{
+	
+}
+
+
+package com.demo.io;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteExample {
+
+	public static void main(String[] args) throws IOException {
+		FileWriter fos =null;
+	try {
+		fos = new FileWriter("test3.txt");
+		String message= "test";
+		for(int i=0;i<message.length();i++) {
+			fos.write(message.charAt(i));
+		}
+	}
+	catch(IOException e) {
+		e.printStackTrace();
+	}
+	finally {
+		/*
+		 * Closes the stream, flushing it first. Once the stream has been closed,further
+		 * write() or flush() invocations will cause an IOException to bethrown. Closing
+		 * a previously closed stream has no effect.
+		 */
+		fos.close();
+	}
+}
+}
+
+
+package com.demo.io;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteExample {
+
+	public static void main(String[] args) throws IOException {
+		File file = new File("test3.txt");
+		FileWriter fw = new FileWriter(file);
+		FileReader fr = new FileReader(file);
+		try (fw ; fr) {
+
+			String message = "welcome";
+			char ar[] = message.toCharArray();
+
+		}
+
+	}
+}
+
+
+Serialization:
+-------------
+
+the process of converting state of an object to byte stream 
+
+An ObjectOutputStream writes primitive data types and graphs of Java objects to an OutputStream.
+
+Exception in thread "main" java.io.NotSerializableException: com.demo.io.Employee
+	at java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1187)
+	at java.base/java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:350)
+	at com.demo.io.Service1.main(Service1.java:16)
+
+
+Employee                                 
+id
+name
+address
+
+
+package com.demo.io;
+
+import java.io.Serializable;
+
+public class Employee implements Serializable {
+	
+	int id =123;
+	String name= "raj";
+	double salary =10020.0;
+
+}
+
+
+package com.demo.io;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+public class Service1 {
+	
+	public static void main(String[] args) throws IOException {
+		
+		Employee employee = new Employee();
+		FileOutputStream fos = new FileOutputStream("test.txt");
+		ObjectOutputStream  oos = new ObjectOutputStream (fos);
+		
+		oos.writeObject(employee);
+		System.out.println("Employee Object is serialized");
+		
+	}
+
+}
+
+
+
+
+
+package com.demo.io;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+public class Service2 {
+	
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		
+		FileInputStream file = new FileInputStream("test.txt");
+		
+		try (ObjectInputStream oos = new ObjectInputStream(file)) {
+			Employee readObject = (Employee)oos.readObject();
+			
+			System.out.println(readObject.id);
+			System.out.println(readObject.salary);
+		}
+		
+	}
+
+}
+
+
+
+Exception in thread "main" java.io.InvalidClassException: com.demo.io.Employee; local class incompatible: stream classdesc serialVersionUID = -1510658584073402596, local class serialVersionUID = 1855433728254852873
+	at java.base/java.io.ObjectStreamClass.initNonProxy(ObjectStreamClass.java:597)
+	at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2051)
+	at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1898)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2224)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1733)
+	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:509)
+	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:467)
+	at com.demo.io.Service2.main(Service2.java:15)
+
+
+	transient:
+	---------
+
+package com.demo.io;
+
+import java.io.Serializable;
+
+public class Employee implements Serializable {
+	int id = 123;
+	transient double salary = 10020.0;
+
+}
+
+package com.demo.io;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+public class Service1 {
+	
+	public static void main(String[] args) throws IOException {
+		
+		Employee employee = new Employee();
+		FileOutputStream fos = new FileOutputStream("test.txt");
+		ObjectOutputStream  oos = new ObjectOutputStream (fos);
+		
+		oos.writeObject(employee);
+		System.out.println("Employee Object is serialized");
+		
+	}
+
+}
+
+
+package com.demo.io;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+public class Service2 {
+	
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		
+		FileInputStream file = new FileInputStream("test.txt");	
+		try (ObjectInputStream oos = new ObjectInputStream(file)) {
+			Employee readObject = (Employee)oos.readObject();	
+
+			System.out.println(readObject.id);
+			System.out.println(readObject.salary);
+
+		}
+		
+	}
+
+}
+
+Serializability of a class is enabled by the class implementing the java.io.Serializable interface.
+
+ Classes that do not implement this interface will not have any of their state serialized or deserialized. 
+
+ All subtypes of a serializable class are themselves serializable. The serialization interface has no methods or fields and serves only to identify the semantics of being serializable.
+
+
+package com.demo.io;
+
+import java.io.Serializable;
+
+public class Employee implements Serializable {
+	int id = 123;
+	transient double salary = 10020.0;
+
+}
+
+
+package com.demo.io;
+
+public class ContractEmployee extends Employee{
+	
+	int contract_code=1;
+
+}
+
+
+package com.demo.io;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+public class Service1 {
+	
+	public static void main(String[] args) throws IOException {
+		
+		ContractEmployee employee = new ContractEmployee();
+		FileOutputStream fos = new FileOutputStream("test.txt");
+		ObjectOutputStream  oos = new ObjectOutputStream (fos);
+		
+		oos.writeObject(employee);
+		System.out.println("Employee Object is serialized");
+		
+	}
+
+}
+
+
+package com.demo.io;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+public class Service2 {
+	
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		
+		FileInputStream file = new FileInputStream("test.txt");
+		
+		try (ObjectInputStream oos = new ObjectInputStream(file)) {
+			ContractEmployee readObject = (ContractEmployee)oos.readObject();
+			
+			System.out.println(readObject.id);
+			System.out.println(readObject.salary);
+			System.out.println(readObject.contract_code);
+
+		}
+		
+	}
+
+}
+
