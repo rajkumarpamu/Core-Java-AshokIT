@@ -1,0 +1,242 @@
+package com.demo.io;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public final class Record {
+
+	private final String name;
+	private final Integer id;
+	private final List<String> phoneNumbers;
+
+	public Record(String name, Integer id, List<String> phoneNumbers) {
+		this.name = name;
+		this.id = id;
+		this.phoneNumbers = phoneNumbers;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public List<String> getPhoneNumbers() {
+		List<String> newList = new ArrayList<>();
+		newList.addAll(phoneNumbers);
+		return newList;
+	}
+
+	@Override
+	public String toString() {
+		return "Record [name=" + name + ", id=" + id + ", phoneNumbers=" + phoneNumbers + "]";
+	}
+
+}
+
+
+package com.demo.io;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		List<String> list = new ArrayList<>();
+		list.add("123");
+		list.add("124");
+		
+		Record record = new Record("sachin", 1,list);
+		System.out.println(record);
+		
+		List<String> phoneNumbers = record.getPhoneNumbers();
+		System.out.println(phoneNumbers);
+		
+		phoneNumbers.add("125");
+		System.out.println(record);
+
+	}
+}
+
+
+Multi threading:
+----------------
+
+public class Thread
+extends Object
+implements Runnable
+
+A thread is a thread of execution in a program. 
+The Java Virtual Machine allows an application to have multiple threads of execution running concurrently.
+
+Every thread has a priority. Threads with higher priority are executed in preference to threads with lower priority. 
+
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at com.demo.io.App.main(App.java:10)
+
+
+Steps to create a thread:
+-------------------------
+
+1)Extend thread class
+2)Create Object to userdefined class
+3)Attach it to main thread (Thread class)
+4)Invoke start()
+
+Causes this thread to begin execution; the Java Virtual Machine
+ calls the run method of this thread.
+
+5)Jvm will invoke run()
+
+package com.demo.mt;
+
+public class UserThread extends Thread{
+	public void mul(int a) {
+		System.out.println(a*a);
+	}
+	
+	@Override
+	public void run() {
+		mul(10);
+	}
+	
+	public static void main(String[] args) {
+	
+		UserThread user = new UserThread();
+
+		Thread thread2 = new Thread(user);
+		thread2.start();
+		
+
+		Thread thread3 = new Thread(user);
+		thread3.start();
+		
+	}
+
+	
+
+}
+
+
+Exception in thread "Thread-1" Exception in thread "Thread-2" java.lang.ArithmeticException
+	at com.demo.mt.UserThread.run(UserThread.java:10)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+java.lang.ArithmeticException
+	at com.demo.mt.UserThread.run(UserThread.java:10)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+
+Exception in thread "main" Exception in thread "Thread-1" Exception in thread "Thread-2"
+ java.lang.ArithmeticException
+	at com.demo.mt.UserThread.main(UserThread.java:24)
+java.lang.ArithmeticException
+	at com.demo.mt.UserThread.run(UserThread.java:10)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+java.lang.ArithmeticException
+	at com.demo.mt.UserThread.run(UserThread.java:10)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+
+package com.demo.mt;
+
+public class UserThread extends Thread{
+	public void mul(int a) {
+		System.out.println(a*a);
+	}
+	
+	@Override
+	public void run() {
+		throw new ArithmeticException();
+	//ul(10);
+	}
+	
+	public static void main(String[] args) {
+	
+		UserThread user = new UserThread();
+		Thread thread2 = new Thread(user);
+		thread2.start();
+		
+
+		Thread thread3 = new Thread(user);
+		thread3.start();
+		
+		throw new ArithmeticException();
+		
+	}
+
+	
+
+}
+
+
+
+package com.demo.mt;
+
+public class UserThread extends Thread{
+	public void mul(int a) {
+		System.out.println(a*a);
+	}
+	
+	@Override
+	public void run() {
+		throw new ArithmeticException();
+	//ul(10);
+	}
+	
+	public static void main(String[] args) {
+	
+		UserThread user = new UserThread();
+		Thread thread2 = new Thread(user);
+		thread2.run();
+		
+
+		Thread thread3 = new Thread(user);
+		thread3.run();
+		
+		throw new ArithmeticException();
+		
+	}
+
+	
+
+}
+
+
+Exception in thread "main" java.lang.ArithmeticException
+	at com.demo.mt.UserThread.run(UserThread.java:10)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+	at com.demo.mt.UserThread.main(UserThread.java:18)
+
+
+package com.demo.mt;
+
+public class UserThread extends Thread {
+	public void mul(int a) {
+		System.out.println(a * a);
+	}
+
+	@Override
+	public void run() {
+		mul(10);
+	}
+
+	public static void main(String[] args) {
+
+		UserThread user = new UserThread();
+		Thread thread2 = new Thread(user);
+		thread2.start();
+		thread2.start();
+
+	}
+
+}
+
+
+100
+Exception in thread "main" java.lang.IllegalThreadStateException
+	at java.base/java.lang.Thread.start(Thread.java:793)
+	at com.demo.mt.UserThread.main(UserThread.java:18)
