@@ -1,0 +1,195 @@
+Thread Life Cycle:
+------------------
+
+
+A thread state. A thread can be in one of the following states:
+NEW
+A thread that has not yet started is in this state.
+
+RUNNABLE
+A thread executing in the Java virtual machine is in this state.
+
+BLOCKED
+A thread that is blocked waiting for a monitor lock is in this state.
+
+WAITING
+A thread that is waiting indefinitely for another thread to perform a particular action is in this state.
+
+TIMED_WAITING
+A thread that is waiting for another thread to perform an action for up to a specified waitin
+
+A thread can be in only one state at a given point in time. These states are virtual machine states which do not reflect any operating system thread states.
+
+
+
+TERMINATED
+A thread that has exited is in this state.
+A thread can be in only one state at a given point in time. These states are virtual machine states which do not reflect any operating system thread states.
+
+
+package com.demo.mt;
+
+public class UserThread extends Thread {
+
+	@Override
+	public void run() {
+		
+		for(int i = 1; i<=10;i++) {
+			try {
+				System.out.println(Thread.currentThread());
+				Thread.sleep(1000);
+				System.out.println("Sleeping the thread");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
+	public static void main(String[] args) {
+
+		UserThread user = new UserThread();
+		Thread thread2 = new Thread(user);
+		System.out.println(thread2.getState());
+		thread2.start();
+		System.out.println(thread2.getState());
+
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class UserThread extends Thread {
+
+	private String message;
+
+	UserThread(String message) {
+		this.message = message;
+	}
+
+	@Override
+	public void run() {
+		Thread currentThread = Thread.currentThread();
+		System.out.println("Message is :" + message + currentThread);
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+
+		UserThread action1 = new UserThread("Balance check");
+		UserThread action2 = new UserThread("withdraw");
+		Thread thread2 = new Thread(action1);
+		Thread thread3 = new Thread(action2);
+		thread2.start();
+		thread2.join();
+		thread3.start();
+
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class UserThread extends Thread {
+
+	private String message;
+
+	UserThread(String message) {
+		this.message = message;
+	}
+
+	@Override
+	public void run() {
+		for(int i=0;i<=10;i++) {
+			System.out.println(Thread.currentThread().toString()+ i);
+		}
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+
+		UserThread action1 = new UserThread("Balance check");
+		UserThread action2 = new UserThread("withdraw");
+		Thread thread2 = new Thread(action1);
+		Thread thread3 = new Thread(action2);
+		thread2.start();
+		thread2.join();
+		thread3.start();
+
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class UserThread extends Thread {
+
+	private String message;
+
+	UserThread(String message) {
+		this.message = message;
+	}
+
+	@Override
+	public void run() {
+		for (int i = 0; i <= 10; i++) {
+			System.out.println(Thread.currentThread().toString() + i);
+		}
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+
+		UserThread action1 = new UserThread("Balance check");
+		UserThread action2 = new UserThread("withdraw");
+
+		action1.start();
+		action1.join(10);
+		action2.start();
+
+	}
+
+}
+
+package com.demo.mt;
+
+public class UserThread implements Runnable {
+
+	private String message;
+
+	UserThread(String message) {
+		this.message = message;
+	}
+
+	@Override
+	public void run() {
+		for (int i = 0; i <= 10; i++) {
+			System.out.println(Thread.currentThread().toString() + i);
+		}
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+
+		UserThread action1 = new UserThread("Balance check");
+		UserThread action2 = new UserThread("withdraw");
+		Thread t1 = new Thread(action1);
+		Thread t2 = new Thread(action1);
+		t1.start();
+		t1.join(10);
+		t2.start();
+
+	}
+
+}
+
+
+public interface Callable<V>
+A task that returns a result and may throw an exception. Implementors define a single method with no arguments called call.
+The Callable interface is similar to Runnable, in that both are designed for classes whose instances are potentially executed by another thread. A Runnable, however, does not return a result and cannot throw a checked exception.
+
+The Executors class contains utility methods to convert from other common forms to Callable classes.
+
+
+V	call()
+Computes a result, or throws an exception if unable to do so.
