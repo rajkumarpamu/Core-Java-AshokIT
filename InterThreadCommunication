@@ -1,0 +1,257 @@
+Synchronization:
+-----------------
+
+Allowing only single thread to access on the resource.
+
+package com.demo.mt;
+
+public class Multiplication {
+	
+	public void cal(int number) {
+		for(int i=1;i<=10;i++) {
+			System.out.println(number+"*"+i+"="+(number*i));
+		}
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class Thread1 extends Thread {
+
+	Multiplication multiplication;
+
+	public Thread1(Multiplication multiplication) {
+		this.multiplication = multiplication;
+	}
+
+	@Override
+	public void run() {
+		multiplication.cal(11);
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class Thread2 extends Thread {
+	Multiplication multiplication;
+
+	public Thread2(Multiplication multiplication) {
+		this.multiplication = multiplication;
+	}
+
+	@Override
+	public void run() {
+		multiplication.cal(10);
+	}
+}
+
+
+package com.demo.mt;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+		Multiplication m = new Multiplication();
+		Thread1 t1 = new Thread1(m);
+		Thread2 t2 = new Thread2(m);
+		t1.start();
+		t2.start();
+		
+	}
+
+}
+
+
+10*1=10
+10*2=20
+11*1=11
+11*2=22
+11*3=33
+11*4=44
+10*3=30
+11*5=55
+11*6=66
+10*4=40
+11*7=77
+11*8=88
+10*5=50
+11*9=99
+10*6=60
+11*10=110
+10*7=70
+10*8=80
+10*9=90
+10*10=100
+
+
+package com.demo.mt;
+
+public class Multiplication {
+	
+	public synchronized void cal(int number) {
+		System.out.println("Lock Aqcuired");
+		for(int i=1;i<=10;i++) {
+			System.out.println(number+"*"+i+"="+(number*i));
+		}
+		System.out.println("Lock Rleased");
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class Thread1 extends Thread {
+
+	Multiplication multiplication;
+
+	public Thread1(Multiplication multiplication) {
+		this.multiplication = multiplication;
+	}
+
+	@Override
+	public void run() {
+		multiplication.cal(11);
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class Thread2 extends Thread {
+	Multiplication multiplication;
+
+	public Thread2(Multiplication multiplication) {
+		this.multiplication = multiplication;
+	}
+
+	@Override
+	public void run() {
+		multiplication.cal(10);
+	}
+}
+
+
+package com.demo.mt;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+		Multiplication m = new Multiplication();
+		Thread1 t1 = new Thread1(m);
+		Thread2 t2 = new Thread2(m);
+		t1.start();
+		t2.start();
+		
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class Multiplication {
+	
+	public  void cal(int number) {
+		System.out.println("Lock Aqcuired");
+		synchronized(this) {
+		for(int i=1;i<=10;i++) {
+			System.out.println(number+"*"+i+"="+(number*i));
+		}
+		}
+		System.out.println("Lock Rleased");
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class Account {
+	int balanceAmount=20000;
+	
+	public synchronized void deposit(int amount) {
+		System.out.println("Depositing the amount");
+		this.balanceAmount+=amount;
+		System.out.println("Depositing Completed Availaible Balance :"+balanceAmount);
+		notify();
+	}
+
+	public synchronized void withdraw(int amount) {
+		System.out.println("Withdrwaing the amount");
+		if(this.balanceAmount < amount) {
+			System.out.println("In Sufficent PLease deposit");
+		try {
+			wait();
+		} catch (InterruptedException e) {
+		}
+		}
+		this.balanceAmount-=amount;
+		System.out.println("Withdrwaing Completed Remaing Balance:"+balanceAmount);
+		
+	}
+}
+
+package com.demo.mt;
+
+public class Thread1 extends Thread {
+
+	Account account;
+
+	public Thread1(Account account) {
+		this.account = account;
+	}
+
+	@Override
+	public void run() {
+		System.out.println(Thread.currentThread());
+		account.withdraw(30000);
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class Thread2 extends Thread {
+	Account account;
+
+	public Thread2(Account account) {
+		this.account = account;
+	}
+
+	@Override
+	public void run() {
+		System.out.println(Thread.currentThread());
+		account.deposit(10000);
+	}
+}
+
+package com.demo.mt;
+
+public class App {
+	
+	public static void main(String[] args) {
+		Account account = new Account();
+		Thread1 t1 = new Thread1(account);
+		Thread2 t2 = new Thread2(account);
+		t1.setName("Withdraw");
+		t1.start();
+		t2.setName("Deposit");
+		t2.start();
+		
+	}
+
+}
+
+
+
+
+..Causes the currently executing thread to sleep (temporarily cease execution) for the specified number of milliseconds, subject to the precision and accuracy of system timers and schedulers.
