@@ -1,0 +1,148 @@
+Java 8
+Functional Interfaces:
+---------------------
+
+SAM -> Single abstract method
+
+package com.demo.mt;
+
+public class Demo implements Runnable{
+	@Override
+	public void run() {
+		System.out.println("Thread started");
+		
+	}
+
+}
+
+
+package com.demo.mt;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		
+		Runnable rb = new Demo();
+		new Thread(rb).start();
+	}
+
+}
+
+
+
+package com.demo.mt;
+
+public class Test {
+
+	public static void main(String[] args) {
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("Thread STarted");
+			}
+		}).start();
+	}
+
+}
+
+package com.demo.mt;
+
+public class Test {
+
+	public static void main(String[] args) {
+
+		new Thread(() ->{
+			System.out.println("Thread started");
+		}).start();
+	}
+
+}
+
+
+
+package com.demo.mt;
+
+@FunctionalInterface
+public interface Square {
+
+	public int  sqaure(int number);
+	
+	
+}
+
+
+package com.demo.mt;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Square s = (number) -> {return number*number;};		
+		int total = s.sqaure(10);
+		System.out.println(total);
+	}
+
+}
+
+
+()  parameter list
+-> Arrow opearttor
+{} -> Body
+
+
+
+
+() -> {};
+
+Runnable
+Callable
+Consumer
+BiConsumer
+
+package com.demo.mt;
+
+@FunctionalInterface
+public interface Square {
+
+	public int  sqaure(int number);
+	
+    default void m1() {}
+    
+    default void m2() {}
+    
+    static void m3() {}
+    
+    static void m4() {}
+	
+}
+
+
+package com.demo.mt;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Test {
+
+	public static void main(String[] args) {
+
+		List<Integer> list = new ArrayList<>();
+		list.add(10);
+		list.add(20);
+		list.add(30);
+		
+		Stream<Integer> stream = list.stream();
+		System.out.println(stream);
+		Predicate<Integer> predicate = t -> t.intValue()>20;
+		List<Integer> collect = stream.filter(predicate)
+				.collect(Collectors.toList());
+		System.out.println(collect);
+
+		
+	}
+
+}
