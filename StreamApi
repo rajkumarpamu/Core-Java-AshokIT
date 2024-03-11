@@ -1,0 +1,126 @@
+default Stream<E>	stream()
+Returns a sequential Stream with this collection as its source.
+
+
+long	count()
+Returns the count of elements in this stream.
+
+Stream<T>	filter(Predicate<? super T> predicate)
+
+Optional<T>	findAny()
+
+void	forEach(Consumer<? super T> action)
+
+
+<R> Stream<R>	map(Function<? super T,? extends R> mapper)
+
+
+T	reduce(T identity, BinaryOperator<T> accumulator)
+
+
+
+List<Integer>    stream()  -> (intermediate opeartion)transformation (map,filter) -> termnalopeartion(.collect())
+
+
+
+package com.demo.mt;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		List<Integer> asList = Arrays.asList(1, 2, 3, 4);
+		Stream<Integer> stream1 = asList.stream();
+
+		Stream<Integer> stream2 = stream1.map(t -> t * t);
+		List<Integer> collect = stream2.collect(Collectors.toList());
+		System.out.println(collect);
+
+	}
+
+}
+
+
+package com.demo.mt;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		List<Integer> asList = Arrays.asList(1, 2, 3, 4);
+		Stream<Integer> stream1 = asList.stream();
+
+		Stream<Integer> stream2 = stream1.map(t -> t * t);
+		Stream<Integer> stream3 = stream2.filter(t -> t > 10);
+		List<Integer> collect = stream3.collect(Collectors.toList());
+		System.out.println(collect);
+
+	}
+
+}
+
+
+package com.demo.mt;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		List<Integer> asList = Arrays.asList(1, 2, 3, 4);
+
+		long count = asList
+				.stream()
+				.map(t -> t+2 ) //Intermediate Operation
+				.filter(t -> t>5)//Intermediate Operation
+				.count(); // terminal operation
+		
+		System.out.println(count);
+
+
+	}
+
+}
+
+
+
+package com.demo.mt;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		List<Integer> asList = Arrays.asList(1, 2, 3, 4);
+
+		Optional<Integer> resOptional = asList.stream().map(t -> t + 2) // Intermediate Operation
+				.filter(t -> t > 1)// Intermediate Operation
+				.max(Comparator.comparingDouble(t -> t)); // terminal operation
+
+		if (resOptional.isPresent())
+			System.out.println(resOptional.get());
+
+	}
+
+}
