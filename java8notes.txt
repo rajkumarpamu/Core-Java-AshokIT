@@ -1,0 +1,1281 @@
+Date :23-01-2024
+Topic:Java 8 
+Link :http://tinyurl.com/java8-notes1
+------------------------------------------------------------
+Java 8 Features:
+----------------
+
+jdk 5.0v  -> generic , for-each loop,autoboxing
+
+jdk 1.8v  
+ 1. Lambda expression
+ 2. Functional Interface
+ 3. default method
+ 4. static method
+ 5. Stream API
+
+ 7. Method Reference(double ::)
+ etc.....
+
+-------------------------------------------------------------
+Nested Classes
+----------------
+I. static
+II. non-static or inner classes
+         a. Member inner class
+         Eg:
+         class A {//outer class
+	int a;
+	class B {// Member inner class
+		int b;
+
+		void show() {
+			a = 10;
+			b = 20;
+			int sum = a + b;
+			System.out.println(sum);
+		}
+	}
+
+	void display() {
+		System.out.println("hi");
+	}
+}
+class Test {
+
+	public static void main(String[] args) {
+			A aref = new A();
+			A.B ab=aref.new B();
+			ab.show();
+			aref.display();
+			
+	}
+}
+-------------------------------------------------
+b. Local  inner class
+Eg:
+class A {// outer class
+	int x = 100;// instance var
+
+	void process() {// instance methiod
+		int a = 20;// local variable
+		class B { // Local Inner class
+			int b = 10;
+
+			void add() {
+				System.out.println(a + b + x);
+			}
+		}
+		B bref = new B();
+		bref.add();
+		System.out.println("a:"+a);
+	}
+}
+class Test {
+	public static void main(String[] args) {
+              A aref = new A();
+              aref.process();
+    }
+}
+==================================================
+c. Anonymous Inner Class
+-------------------------
+I. class(abstract class)
+Eg:
+
+abstract class Calculator {
+	abstract void calc(int a, int b);
+}
+
+
+
+public class Test {
+	public static void main(String[] args) {
+		Calculator cref = new Calculator() {
+
+			@Override
+			void calc(int a, int b) {
+				System.out.println(a + b);
+
+			}
+		};
+		cref.calc(10, 20);
+	}
+}
+II. Interface
+Eg:
+
+interface Calculator {
+	 public abstract int calc(int a, int b);
+	 public abstract void display(int res);
+}
+
+public class Test {
+	public static void main(String[] args) {
+		Calculator cref = new Calculator() {
+			@Override
+			public int calc(int a, int b) {
+				return (a + b);
+			}
+			@Override
+			public void display(int res) {
+				System.out.println("Res:" + res);
+			}
+		};
+		int res=cref.calc(10, 20);
+		cref.display(res);
+	}
+}
+--------------------------------------------------
+Q: What is marker/tagged interface?
+Ans: An interface which does'nt contain any methods such type of interface is called as
+tagged interface
+Eg: Serializable
+---------------------------------------------------------
+1. Lambda Expression
+=======================
+|-> This is introduced in JDK 1.8v onwards.
+
+- Is a simple function or expression which does'nt contain
+  name, return type , access modifier.
+
+
+ Eg:
+
+      public void m1(){
+
+      }
+
+      public => access modifierr
+      void   => return Type
+      m1     => method name
+      {}     => method body
+
+ Eg:
+      ()=>{
+         //write the logic
+      }
+
+=========================================================
+2. Functional Interface
+-------------------------
+|-> An interface which contain only single abstract method(SAM) such type of interface is called as functional interface.
+|-> It is declare with @FunctionalInterface annotation.
+It is applicable only at interface level.
+
+Syntax:
+--------
+@FunctionalInterface
+interface interfaceName{
+	//SAM
+}
+
+Note: Inside this functional interface we can add
+      any no of default and static methods
+Eg:
+Step1:
+@FunctionalInterface
+interface Calculator {
+	void calc(int a, int b);
+		 
+}
+
+class Addition implements Calculator{
+	
+	@Override
+	public void calc(int a,int b){
+	 System.out.println(a+b)
+	}
+}
+class Test{
+	main(..){
+	 Calculator cref = new Addition();
+	   cref.calc(10,20);
+	}
+}
+
+II. By using Annonymous inner class
+
+Step1:
+@FunctionalInterface
+interface Calculator {
+	void calc(int a, int b);
+		 
+}
+
+class Test{
+	main(..){
+	 Calculator cref = new Calculator(){
+          @Override
+           public void calc(int a,int b){
+              System.out.println(a+b);
+           }
+	 };
+	   cref.calc(10,20);
+	}
+}
+
+III. By using lambda expression
+
+@FunctionalInterface
+interface Calculator {
+	void calc(int a, int b);
+		 
+}
+
+class Test{
+	main(...){
+	    Calculator cref = (int a,int b)->{
+              System.out.println(a+b);
+	    };
+	    cref.calc(10,20);
+	}
+}
+
+Eg2:
+
+@FunctionalInterface
+interface MyPredicate {
+	boolean myTest(int a);
+
+}
+ 
+public class Test {
+	public static void main(String[] args) {
+		 MyPredicate mref = (num)->{
+			 return (num%2==0)?true:false;
+		 };
+		 boolean res=mref.myTest(10);
+		 System.out.println(res);
+		
+	}
+}
+Eg3:
+import java.util.function.Predicate;
+
+public class Test {
+	public static void main(String[] args) {
+		int arr[] = {10,2,34,43,121};
+		  Predicate<Integer> pref=(num)->{
+			  return (num%2==0)?true:false;
+		  };
+		  
+		  for(int i=0;i<arr.length;i++) {
+			  boolean res=pref.test(arr[i]);
+			  if(res)
+			  System.out.println(arr[i]);
+		  }
+		
+	}
+}
+--------------------------------------------------------
+Date :24-01-2024
+Topic:Java 8(Pre-define Functional Interface) 
+Link :http://tinyurl.com/java8-notes2
+--------------------------------------------------------
+java.util.funtion.*;
+1. Predicate
+2. Function
+3. Consumer
+4. Supplier
+5. BiPredicate
+6. BiFunction
+7. BiConsumer
+8. BinaryOperator
+9. IntPredicate
+10.IntFunction
+11.IntConsumer
+etc....
+
+Case1: Created a Functional interface with the single method.
+Specification: A method which does'nt return any thing and does'nt take any argument.
+
+Eg:
+
+//Case1:
+@FunctionalInterface
+interface MyInterface {
+	void greetingMessage();
+}
+
+public class Test {
+	public static void main(String[] args) {
+	  MyInterface ref=()->System.out.println("Good Evening..");
+		
+	  ref.greetingMessage();
+	  
+	}
+
+}
+--------------------------------------------------------
+Case2: Method with single arguments.
+Eg:
+
+//Case2:
+@FunctionalInterface
+interface MyInterface {
+	void greetingMessage(String message);
+}
+
+public class Test {
+	public static void main(String[] args) {
+		MyInterface ref = (String msg) -> System.out.println(msg);
+
+		ref.greetingMessage("Good Evening");
+
+	}
+
+}
+--------------------------------------------------------
+ 
+import java.util.List;
+
+//Case2:
+@FunctionalInterface
+interface MyInterface {
+	void greetingMessage(String message);
+}
+
+ 
+
+
+public class Test {
+	public static void main(String[] args) {
+		MyInterface ref = (String fruitName) -> System.out.println(fruitName);
+
+		List<String> listofFruits = List.of("apple", "orange", "mango", "banana", "pineapple");
+	 
+		for(int i=0;i<listofFruits.size();i++) {
+			  ref.greetingMessage(listofFruits.get(i));
+		}
+		
+		
+	}
+
+}
+--------------------------------------------------------
+//Step1:
+@FunctionalInterface
+interface MyInterface {
+	void greetingMessage(String message);
+}
+//Step2:
+@FunctionalInterface
+interface Interface1 {
+	void display(MyInterface ref,String msg);
+}
+//Step3:
+public class Test {
+	public static void main(String[] args) {
+		Interface1 ref1=(MyInterface ref,String msg)->{
+			ref.greetingMessage(msg);
+		};
+		//MyInterface ref2=(msg)->System.out.println(msg); 
+		ref1.display((msg)->System.out.println(msg), "Hello World");
+	}
+
+}
+=======================================================
+Req: Write a java  code to print all the name of items and it's length.
+
+import java.util.List;
+
+//Step1:
+@FunctionalInterface
+interface MyInterface {
+	int method(String message);
+}
+ 
+//Step2:
+public class Test {
+	public static void main(String[] args) {
+	    MyInterface ref=(item)->{
+	    	return item.length();
+	    };
+		List<String> list=List.of("mobile", "laptop", "keyboard", "monitor");
+		 
+		for(String item:list) {
+			int length = ref.method(item);
+			System.out.println(item+":"+length);
+		}
+		
+	}
+
+}
+--------------------------------------------------------
+import java.util.List;
+
+//Step1:
+@FunctionalInterface
+interface MyInterface {
+	boolean method(String message);
+}
+
+//Step2:
+public class Test {
+	public static void main(String[] args) {
+		MyInterface ref = (item) -> {
+			return item.startsWith("m");
+		};
+		List<String> list = List.of("mobile", "laptop", "keyboard", "monitor");
+
+		for (String item : list) {
+			if (ref.method(item))
+				System.out.println(item);
+
+		}
+
+	}
+
+}
+--------------------------------------------------------
+1. Predicate:
+-------------
+|-> It is pre-define funcational interface which is 
+   added from jdk 1.8v onwards.
+|-> It contain the following method:
+
+ I. boolean test(T t);
+
+|-> Here it always return the boolean value.
+
+Eg: Write a java code to verify the the number is even or not.
+
+a. Without using lambda expression
+Solution:
+import java.util.List;
+import java.util.function.Predicate;
+
+class classA implements Predicate<Integer> {
+	@Override
+	public boolean test(Integer num) {
+		return (num % 2 == 0) ? true : false;
+	}
+}
+
+public class Test {
+	public static void main(String[] args) {
+		List<Integer> listNumbers = List.of(1, 2, 30, 100, 11, 34, 33, 19, 23);
+		classA cref = new classA();
+		for (Integer number : listNumbers) {
+			if (cref.test(number))
+				System.out.println(number);
+
+		}
+
+	}
+
+}
+
+b. with using lambda expression
+-------------------------------
+import java.util.List;
+import java.util.function.Predicate;
+public class Test {
+	public static void main(String[] args) {
+	Predicate<Integer> pref = (num) ->(num % 2 == 0) ? true : false;
+	List<Integer> listNumbers = List.of(1, 2, 30, 100, 11, 34, 33, 19, 23);
+	for (Integer num : listNumbers) {
+			if (pref.test(num))
+				System.out.println(num);
+		}
+	}
+}
+------------------------------------------------------------------
+2. Function
+------------
+|-> It is functional interface.
+|-> Added from jdk 1.8v onwards.
+|-> The following is the abstract method.
+
+I. R apply(T t);
+ T - the type of the input to the function
+ R - the type of the result of the function
+
+Eg:
+import java.util.List;
+import java.util.function.Function;
+public class Test {
+	public static void main(String[] args) {
+		Function<String,Integer> ref=(input)->input.length();
+		List<String> listofFruits = List.of("apple", "orange", "mango", "banana", "pineapple");
+
+		for(String item:listofFruits) {
+			System.out.println(item+":"+ref.apply(item));
+		}
+	}
+}
+---------------------------------------------------------------
+3. Consumer
+|-> It is a functional interface.
+|-> Added in jdk 1.8v 
+|-> The following is the method
+	void accept(T t);
+	|-> Here T is type of input
+
+Eg:
+----
+import java.util.List;
+import java.util.function.Consumer;
+
+public class Test {
+	public static void main(String[] args) {
+		//Function<String,Integer> ref=(input)->input.length();
+		Consumer<String> ref=(item)->System.out.println(item);
+		
+		List<String> listofFruits = List.of("apple", "orange", "mango", "banana", "pineapple");
+		 	
+		for(String item:listofFruits) {
+			ref.accept(item);
+		}
+		
+	}
+}
+Eg2:
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+public class Test {
+	public static void main(String[] args) {
+		//Function<String,Integer> ref1=(input)->input.length();
+		Consumer<String> ref2=(item)->System.out.println(item);
+		
+		List.of(
+				"apple", 
+				"orange", 
+				"mango", 
+				"banana", 
+				"pineapple").forEach(ref2);
+		 	
+		 //listofFruits.forEach(ref2);
+	}
+}
+
+Eg:
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+public class Test {
+	public static void main(String[] args) {
+		Function<String,Integer> ref1=(input)->input.length();
+		Consumer<String> ref2=(item)->System.out.print(item);
+		
+		List<String> list=List.of(
+				"apple", 
+				"orange", 
+				"mango", 
+				"banana", 
+				"pineapple");
+		
+		 	for(String item:list) {
+		 		ref2.accept(item);
+		 		System.out.println(":"+ref1.apply(item));
+		 	}
+	}
+}
+------------------------------------------------------------
+Date :25-01-2024
+Topic:  Default , Static Method, 
+        Constructor and Method Reference by using (::) op
+        Stream API
+Link :http://tinyurl.com/java8-notes3
+-----------------------------------------------------------
+default & static method in interface
+------------------------------------
+default method:
+----------------
+|-> Upto JDK 1.7v we can add only public abstract methods
+   and public static final variables inside the interface.
+|-> Since from JDK 1.8v onwards we can add the default method
+|-> The main advantage of default method is without effective the implemenation classes we can add the functionality to exisiting itnerface i.e backward compatability.
+
+syntax:
+-------
+ default returnType methodName(){
+
+ }
+
+|-> Can we write any no of default methods inside the interface?
+Ans: Yes
+
+|-> Can we override the default methods?
+Ans: Yes
+
+Example:
+----------
+Step1: Create the EmployeeDAO.java file
+import java.util.ArrayList;
+public interface EmployeeDAO {
+ void insert();
+ void update();
+ ArrayList getAll();
+ default void logs() {
+	 
+ }
+}
+
+Step2: Create the implemenation class Test1.java
+import java.util.ArrayList;
+public class Test1 implements EmployeeDAO {
+
+	@Override
+	public void insert() {
+		 Sysout("insert the record");
+		
+	}
+
+	@Override
+	public void update() {
+		Sysout("update the table");
+	}
+
+	@Override
+	public ArrayList getAll() {
+		 
+		return null;
+	}
+}
+------------------------------------------------------------
+Q: Can we add the default methods inside the Functional Interface?
+Ans: Yes
+-----------------------------------------------------------
+Example of default method:
+--------------------------
+
+interface Calculator {
+	void calc(int a, int b);
+	default void message() {
+		System.out.println("Perform the operaiton..");
+	}
+}
+
+class Addition implements Calculator{
+	
+	@Override
+	public void calc(int a, int b) {
+		System.out.println(a+b);	
+	}
+}
+public class Test {
+	public static void main(String[] args) {
+		 Calculator aref = new Addition();
+		 aref.message();
+		 aref.calc(10, 20);
+		 
+	}
+}
+------------------------------------------------------------
+Example2:
+@FunctionalInterface
+interface Calculator {
+	void calc(int a, int b);
+	default void logFatal() {
+		System.out.println("fatal error...");
+	}
+	default void logWarn() {
+		System.out.println("for warning..");
+	}
+	default void logError() {
+		System.out.println("show errors...");
+	}
+}
+ 
+public class Test {
+	public static void main(String[] args) {
+		 Calculator cref=(a,b)->System.out.println(a+b);
+		 //invoke the calc method
+		 cref.calc(10, 20);
+		 //invoke the default method
+		 cref.logFatal();
+		 cref.logWarn();
+		 cref.logError();
+	}
+}
+-------------------------------------------------------------static method in interface:
+----------------------------
+|-> static method is added since from jdk 1.8v.
+|-> It is used as utitlity method.
+|-> It will not depend on object createion
+|-> We can call/invoke by using following way:
+
+            InterfaceName.staticMethod();
+
+ Note: We cannot override the static method.
+
+
+static returnType methodName(){
+	//statement
+}
+
+|-> We cannot override the static method in implementation
+class but we write the same method then the compiler will consider as Implemenation class method.
+
+Example:
+--------
+interface Bill {
+	public abstract double calc(int nou);
+
+	default void display(double amount) {
+		System.out.println(amount);
+	}
+
+	static double per_unit() {
+		return 5.0;
+	}
+}
+
+class ElectricBill implements Bill{
+	 
+ 	@Override
+	public double calc(int nou) {
+		 return Bill.per_unit() * nou;
+	}
+}
+
+public class Test {
+	public static void main(String[] args) {
+		Bill bref = new ElectricBill();
+		double eAmount = bref.calc(250);
+		bref.display(eAmount);
+	}
+}
+-------------------------------------------------------------
+Constructor and Method Reference by using double(::) operator
+=============================================================
+|-> Functional interface method mapped with user define method by using double(::) operator. This is called as 
+method reference.
+
+
+|-> Functional interface is refer to lambda expression. It also can refer with the  method reference. Hence we can replace lambda expresion with method reference.
+
+
+|-> If we want to refer the method reference we use the following ways:
+
+  1.For non-static methods
+       objectRef::methodName;
+  2.For static method
+       className::methodName;
+
+
+Example: With non-static method
+---------------------------------
+@FunctionalInterface
+interface A {
+ void message();
+	 
+}
+class MyClass{
+	void myMessage() {
+		System.out.println("Hello");
+	}
+}
+ 
+public class Test {
+	public static void main(String[] args) {
+		//With Method Reference
+		  MyClass mref = new MyClass();
+		  A aref= mref::myMessage;
+		  aref.message();
+		
+		//With Lambda Expression
+		 A objectRef =()->System.out.println("Hello");
+		 objectRef.message();
+		  
+		 
+		 
+		  
+	}
+}
+-------------------------------------------------------------
+II. By using static method
+--------------------------
+@FunctionalInterface
+interface A {
+ void message();
+	 
+}
+class MyClass{
+	static void myMessage() {
+		System.out.println("Hello");
+	}
+}
+ 
+public class Test {
+	public static void main(String[] args) {
+		//With Method Reference
+		  A aref= MyClass::myMessage;
+		  aref.message();
+	}
+}
+------------------------------------------------------------
+                    Stream API
+ --------------------------------------------------
+
+java.util.stream.*; 
+|-> It is used to process the group of objects which is store in collections.
+
+|-> Stream is a interface which is define inside java.util.stream.*;
+|-> In order to get the Stream object we use the following 
+ways:
+
+I.
+        Stream stream =ref.stream();
+
+|-> Once we get the stream object we can do the following things:
+
+a. Configuration
+		1. By using filter() method
+		   Predicate -->    boolean test(T t );
+
+		2. By using map() method
+		    Function ->     R apply(T t);
+
+b. Processing
+|-> For processing we can use any of the methods:
+   count(), sum(), max(), min(), forEach(), reduce() et....
+
+
+Req: Write a java code to display all the even numbers from the list.
+
+Example1:
+import java.util.ArrayList;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+ 
+ 
+ 
+
+public class Test {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void main(String[] args) {
+	   ArrayList<Integer> list =new ArrayList();
+	   list.add(2);list.add(1);list.add(3);list.add(10);
+	   
+	   //Normal Code
+	   /*for(int element:list) {
+		   if(element%2==0)
+			   System.out.println(element);
+	   }*/
+	   //Stream API
+	   //Step1: Get the Stream object
+	   
+	   Stream<Integer> stream =list.stream();
+	   
+	   //Step2: Configuration
+	   			// filter()
+	   Predicate<Integer> p=(num)->{
+		   		return (num%2==0)?true:false;
+	   };
+	   Stream newStream= stream.filter(p);
+	   
+	   //Step3: Processing
+	   Consumer<Integer> consumer=(num)->System.out.println(num);
+	   newStream.forEach(consumer);
+	   
+	   
+	   
+	   
+	   
+	   
+	}
+}
+
+Example2:
+import java.util.ArrayList;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+ 
+ 
+ 
+
+public class Test {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void main(String[] args) {
+	   ArrayList<Integer> list =new ArrayList();
+	   list.add(2);list.add(1);list.add(3);list.add(10);
+	 
+	     list.stream()
+	     	 .filter((num)-> num%2==0) // Configuration
+	     	 .forEach((num)->System.out.println(num));//processing
+	   
+	   
+	 }
+}
+-----------------------------------------------------------
+Date :  26-01-2024
+Topic:  Stream API
+Link : http://tinyurl.com/java8-notes4
+-----------------------------------------------------------
+Req: Write a java code to print all the even elements from the list.
+Solution:
+---------
+import java.util.ArrayList;
+import java.util.stream.Stream;
+
+public class Test {
+	 
+	public static void main(String[] args) {
+	   //Get the a group of objects
+		ArrayList<Integer> 
+		list = new ArrayList<Integer>();
+		//Store some few integer values
+		list.add(2);list.add(1);list.add(3);list.add(4);list.add(5);
+		process(list);
+	 }
+
+	public static void process(ArrayList<Integer> list) {
+		 //For Processing the group of objects from the list
+		// We need to following the below steps:
+		//1. Configuration
+		//getting the stream object
+		//Stream<Integer> stream=list.stream();
+		//Stream<Integer> newS=stream.filter((num)->num%2==0);
+		//newS.forEach((num)->System.out.println(num));
+		list.stream()
+			.filter((num)-> num%2==0)
+			.forEach(num->System.out.println(num));
+	}
+}
+-----------------------------------------------------------
+stream()
+filter()
+map()
+distinct()
+sum()
+reduce()
+forEach()
+sorted()
+sorted(Comparator c);
+Example:
+import java.util.ArrayList;
+ 
+
+public class Test {
+
+	public static void main(String[] args) {
+		// Get the a group of objects
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		// Store some few integer values
+		list.add(2);list.add(1);
+		list.add(3);list.add(4);list.add(5);
+		list.add(5);list.add(2);list.add(1);
+		System.out.println("---DISPLAY ALL EVEN NUM---");
+		process(list);
+		System.out.println("---DISPLAY EVEN COUNT---");
+		countAllEventElements(list);
+		System.out.println("---SUM OF ALL THE ELEMENTS");
+		sumOFAllElements(list);
+		System.out.println("---DISPLAY ALL DISTINCT ELEMENT---");
+		displayAllDistinctElements(list);
+		System.out.println("\n--SORT ALL THE DISTICT ELEMENTS--");
+		sortAllElements(list);
+		System.out.println("\n---SORT ALL THE DISTINCT ELEMENT IN REVERSE ORDER---");
+		sortAllElementsInReverseOrder(list);
+		System.out.println("\n--PRINT ALL THE ELEMENT WHICH IS MULTIPLE BY 2");
+		displayAllElementsMultipleByTwo(list);
+	}
+
+	private static void displayAllElementsMultipleByTwo(ArrayList<Integer> list) {
+		//Write the logic here
+		list.stream()
+			.map(e->e*2)
+			.forEach(e->System.out.print(e+" "));
+		
+	}
+
+	private static void sortAllElementsInReverseOrder(ArrayList<Integer> list) {
+		//Customized sorting by using Comparator and print on console
+	
+		list.stream()
+			.distinct()
+			.sorted((e1,e2)->(e1>e2)?-1:(e1<e2)?1:0) //CSO
+			.forEach(e->System.out.print(e+" "));
+		
+	}
+
+	private static void sortAllElements(ArrayList<Integer> list) {
+		// Sort the distinct elements
+		// and print on the console by using stream api
+		  list.stream()//[2,1,3,4,5,5,2,1]
+		  	  .distinct()//[2,1,3,4,5]
+		  	  .sorted()//[1,2,3,4,5] //NSO
+		  	  .forEach(e->System.out.print(e+" "));//1 2 3 4  5
+		
+	}
+
+	private static void displayAllDistinctElements(ArrayList<Integer> list) {
+		// Display all unique elements from the
+		// list by using stream api
+		list.stream()
+			.distinct()// A stream object which contain all unique elements
+			.forEach(e->System.out.print(e+" "));
+		//2 1 3 4 5
+		
+		
+	}
+
+	private static void sumOFAllElements(ArrayList<Integer> list) {
+		//Sum of all the elements from the list
+		// by using stream api
+		  int sum =list.stream()
+		  	  .reduce(0, (a,b)->a+b)
+		  	  .intValue();
+		  System.out.println(sum);
+		
+	}
+
+	private static void countAllEventElements(ArrayList<Integer> list) {
+		// Count all the even elements from the list
+		// by using stream api
+		long countEven = list.stream().filter((num) -> num % 2 == 0).count();
+		System.out.println(countEven);
+
+	}
+
+	public static void process(ArrayList<Integer> list) {
+		// For Processing the group of objects from the list
+		// We need to following the below steps:
+		// 1. Configuration
+		// getting the stream object
+		// Stream<Integer> stream=list.stream();
+		// Stream<Integer> newS=stream.filter((num)->num%2==0);
+		// newS.forEach((num)->System.out.println(num));
+		list.stream().filter((num) -> num % 2 == 0).forEach(num -> System.out.println(num));
+	}
+}
+------------------------------------------------------------
+Date :  27-01-2024
+Topic:  Stream API
+Link : http://tinyurl.com/java8-notes5
+------------------------------------------------------------
+Req: Write a code to get all even elements and store into a new list.
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Demo {
+	public static void main(String[] args) {
+		List<Integer> list = Arrays.asList(1, 2, 3, 4, 11, 100, 231, 122);
+		// Get all the even elements and store into the newList
+
+		List<Integer> newList = list.stream().filter(e -> e % 2 == 0)// 2,4,100,122
+				.collect(Collectors.toList());// [2,4,100,122]
+
+		System.out.println(newList);
+	}
+
+}
+----------------------------------------------------------------
+Example2:
+Working with aggregate methods
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Demo {
+	public static void main(String[] args) {
+		List<Integer> list1 = Arrays.asList(1, 2);
+		List<Integer> list2 = Arrays.asList(3, 4);
+
+		// Convert above 2 list into a single list
+
+		List<List<Integer>> groupOfList = Arrays.asList(list1, list2);
+		System.out.println(groupOfList);
+		
+		List<Integer> newList = 
+				groupOfList.stream()// giving multiple lists
+						   .flatMap(list -> list.stream())
+						   .collect(Collectors.toList());
+		System.out.println(newList);//[1, 2, 3, 4]
+		
+		//Find  out the sum of elements from the newList
+		int sum=newList.stream()
+			   .mapToInt(e->e)
+			   .sum();
+		System.out.println("Sum of all elements:"+sum);
+		// Find out the average of elements from the newList
+		double avg=newList.stream()
+						.mapToDouble(e->e)
+			   .average().getAsDouble();
+		System.out.println("Avg of all elements:"+avg);
+		 
+		//Find Out the Max among all the elements from the newList
+		int max=newList.stream()
+			   .mapToInt(e->e)
+			   .max().getAsInt();
+		System.out.println(max);
+
+		//Find Out the Min among all the elements from the newList
+		int min=newList.stream()
+			   .mapToInt(e->e)
+			   .min().getAsInt();
+		System.out.println(min);
+		
+		
+	}
+
+}
+-----------------------------------------------------------------
+Example3: map() vs flatMap()
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Test2 {
+	public static void main(String[] args) {
+		String fruitNames[]={"apple","mango","orange"};
+		List<String> list = 
+				Arrays.asList(fruitNames);
+		transformByUsingMap(list);
+		
+		
+		
+		
+		List<Integer> l1=Arrays.asList(1,2);
+		List<Integer> l2=Arrays.asList(3,4);
+		List<Integer> l3=Arrays.asList(5,6);
+		List<Integer> l4=Arrays.asList(7,8);
+		List<List<Integer>> groupofList=Arrays.asList(l1,l2,l3,l4);
+		System.out.println(groupofList);
+		transformByUsingflatMap(groupofList);
+		
+		
+	}
+	private static void transformByUsingflatMap(List<List<Integer>> groupofList) {
+		//Write a logic to flatter
+		List<Integer> l=groupofList.stream()
+				   //.flatMap(list->list.stream())
+				    .flatMap(List::stream)
+				   .collect(Collectors.toList());
+		System.out.println(l);
+		
+	}
+	private static void transformByUsingMap(List<String> list) {
+		// Convert into upper case and display on the console
+		// by using stream api
+		list.stream()
+			//.map(fruit -> fruit.toUpperCase())
+			.map(String::toUpperCase)
+			//.forEach(fruit -> System.out.prinln(fruit + " "));
+			.forEach(System.out::println);
+	}
+
+}
+-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
