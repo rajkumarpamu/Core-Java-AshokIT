@@ -1,0 +1,394 @@
+package com.demo.streams;
+
+public class Employee {
+	private String name;
+	private Integer id;
+	private Double salary;
+	public Employee(String name, Integer id, Double salary) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.salary = salary;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public Double getSalary() {
+		return salary;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", id=" + id + ", salary=" + salary + "]";
+	}
+}
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+		
+	Employee employee1 = new Employee("Raj", 1, 10000.0);
+	Employee employee2 = new Employee("Raj", 2, 20000.0);
+	Employee employee3 = new Employee("Raj", 3, 30000.0);
+	
+	List<Employee> asList = Arrays.asList(employee1,employee2,employee3);
+		
+	
+	List<Employee> collect = asList
+	.stream()
+		.filter(t -> t.getSalary() > 10000)
+			.collect(Collectors.toList());
+	
+	System.out.println(collect);
+	
+	}
+
+}
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+		
+	Employee employee1 = new Employee("Raj", 1, 10000.0);
+	Employee employee2 = new Employee("Raj", 2, 20000.0);
+	Employee employee3 = new Employee("Raj", 3, 30000.0);
+	
+	List<Employee> asList = Arrays.asList(employee1,employee2,employee3);
+		
+	
+List<Double> collect = asList
+	.stream()
+	   .map(t -> t.getSalary()+5000 )
+			.collect(Collectors.toList());
+	
+	System.out.println(collect);
+	
+	}
+
+}
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Test {
+
+	
+	public static void main(String[] args) {
+		
+		List<Integer> asList = Arrays.asList(1,2,3,1,2,3);
+		List<Integer> collect = asList.stream().distinct().collect(Collectors.toList());
+		System.out.println(collect);
+		
+		
+	}
+}
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+public class Test {
+
+	
+	public static void main(String[] args) {
+		
+		List<Integer> asList = Arrays.asList(1,2,3,1,2,3);
+		Optional<Integer> collect = asList.stream().findFirst();
+		System.out.println(collect.get());
+		
+		List<Integer> asList1 = Arrays.asList(1,2,3,1,2,3);
+		Optional<Integer> collect1 = asList1.stream().findAny();
+		System.out.println(collect1.get());
+		
+		
+	}
+}
+
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+public class Test {
+
+	
+	public static void main(String[] args) {
+		
+		List<Integer> asList = Arrays.asList();
+		Optional<Integer> collect = asList
+				.stream()
+						.filter(t -> t>100)
+				.findFirst();
+		
+		System.out.println(collect.orElse(10));
+		
+		List<Integer> asList1 = Arrays.asList(1,2,3,1,2,3);
+		Optional<Integer> collect1 = asList1.stream().findAny();
+		System.out.println(collect1.get());
+		
+		
+	}
+}
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class Test {
+
+	
+	public static void main(String[] args) {
+		
+		List<Integer> asList = Arrays.asList(3,2,1);
+		Integer findFirst = 
+				asList
+					.stream()
+						.reduce((t, u) -> t+u)
+							.orElse(0);
+		
+		System.out.println(findFirst);
+		
+		
+	}
+}
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		Employee employee1 = new Employee("Raj", 1, 10000.0);
+		Employee employee2 = new Employee("Raj", 2, 20000.0);
+		Employee employee3 = new Employee("Raj", 3, 30000.0);
+
+		List<Employee> asList1 = Arrays.asList(employee1, employee3);
+		List<Employee> asList2 = Arrays.asList(employee1, employee2);
+		List<Employee> asList3 = Arrays.asList(employee1, employee3);
+
+		List<List<Employee>> asList = Arrays.asList(asList3, asList1, asList2);
+
+	  List<Double> collect = asList.stream()
+				.flatMap(t -> t.stream())
+				.map(t -> t.getSalary()+10000 )
+				.collect(Collectors.toList());
+
+		System.out.println(collect);
+
+	}
+
+}
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		Employee employee1 = new Employee("Raj", 1, 10000.0);
+		Employee employee2 = new Employee("Raj", 2, 20000.0);
+		Employee employee3 = new Employee("Raj", 3, 30000.0);
+
+		List<Employee> asList1 = Arrays.asList(employee1, employee3);
+		List<Employee> asList2 = Arrays.asList(employee1, employee2);
+		List<Employee> asList3 = Arrays.asList(employee1, employee3);
+
+		List<List<Employee>> asList = Arrays.asList(asList3, asList1, asList2);
+
+	  List<Double> collect = asList.stream()
+				.flatMap(t -> t.stream())
+				.map(Employee::getSalary)
+				.collect(Collectors.toList());
+
+		System.out.println(collect);
+
+	}
+
+}
+
+
+
+
+
+
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+public class Test {
+
+	
+	public static void main(String[] args) {
+		
+		List<Integer> asList = Arrays.asList(3,2,1);
+		  Optional<Integer> findFirst = asList
+				.stream()
+					.sorted()
+						.skip(2)
+						  .findFirst();
+		
+		System.out.println(findFirst.orElse(0));
+		
+		
+	}
+}
+
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+		
+	Employee employee1 = new Employee("Raj", 1, 10000.0);
+	Employee employee2 = new Employee("Raj", 2, 20000.0);
+	Employee employee3 = new Employee("Raj", 3, 30000.0);
+	
+	List<Employee> asList = Arrays.asList(employee1,employee2,employee3);
+		
+	Optional<Employee> findFirst = 
+			asList
+			.stream()
+			.sorted(Comparator.comparingDouble(t -> t.getSalary()))
+			.skip(1)
+			.findFirst();	
+	
+	System.out.println(findFirst.orElse(employee3));
+	
+	}
+
+}
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		Employee employee1 = new Employee("Raj", 1, 10000.0);
+		Employee employee2 = new Employee("Raj", 2, 20000.0);
+		Employee employee3 = new Employee("Raj", 3, 30000.0);
+
+		List<Employee> asList1 = Arrays.asList(employee1, employee3);
+		List<Employee> asList2 = Arrays.asList(employee1, employee2);
+		List<Employee> asList3 = Arrays.asList(employee1, employee3);
+
+		List<List<Employee>> asList = Arrays.asList(asList3, asList1, asList2);
+
+	  List<Integer> collect = asList.stream()
+				.flatMap(t -> t.stream())
+				//Method Reference
+				.map(Employee::getName)
+				.map(String::length)
+				.collect(Collectors.toList());
+
+		System.out.println(collect);
+
+	}
+
+}
+
+
+package com.demo.streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		Employee employee1 = new Employee("Raj", 1, 10000.0);
+		Employee employee2 = new Employee("Raj", 2, 20000.0);
+		Employee employee3 = new Employee("Raj", 3, 30000.0);
+
+		List<Employee> asList1 = Arrays.asList(employee1, employee3);
+		List<Employee> asList2 = Arrays.asList(employee1, employee2);
+		List<Employee> asList3 = Arrays.asList(employee1, employee3);
+
+		List<List<Employee>> asList = Arrays.asList(asList3, asList1, asList2);
+
+	  Integer collect = asList.stream()
+				.flatMap(t -> t.stream())
+				//Method Reference
+				.map(Employee::getName)
+				.map(String::length)
+				.reduce((t, u) -> t+u )
+				.orElse(10);
+				
+
+		System.out.println(collect);
+
+	}
+
+}
+
+
+
